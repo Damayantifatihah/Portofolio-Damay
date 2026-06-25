@@ -41,7 +41,7 @@ const tagColorMap: Record<string, { bg: string; color: string }> = {
   "TypeScript": { bg: "#F9EDE8", color: "#B86048" },
   "Express":    { bg: "#F9EDE8", color: "#B86048" },
   "PostgreSQL": { bg: "#F9EDE8", color: "#B86048" },
-  "MySQL":      { bg: "#F9EDE8", color: "#B86048" },
+
 };
 
 function TimelineCard({ item }: { item: TimelineItem }) {

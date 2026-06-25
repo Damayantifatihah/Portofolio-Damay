@@ -16,37 +16,6 @@ const blobKeyframes = `
 `;
 
 
-
-function SocialBtn({ icon, href, label }: { icon: React.ReactNode; href: string; label: string }) {
-  const [hovered, setHovered] = useState(false);
-
-  return (
-    <a
-      href={href}
-      aria-label={label}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      style={{
-        width: "40px",
-        height: "40px",
-        borderRadius: "50%",
-        backgroundColor: hovered ? "#D97B8A" : "#FDE8EC",
-        color: hovered ? "#FFF8F6" : "#C0606E",
-        border: `1px solid ${hovered ? "#D97B8A" : "#F2CDD4"}`,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        fontSize: "16px",
-        textDecoration: "none",
-        transition: "background 0.2s, color 0.2s, border-color 0.2s",
-        flexShrink: 0,
-      }}
-    >
-      {icon}
-    </a>
-  );
-}
-
 const SelfSection: React.FC = () => {
   const [dlHovered, setDlHovered] = useState(false);
 
