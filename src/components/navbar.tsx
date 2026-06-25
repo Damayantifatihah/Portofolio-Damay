@@ -108,8 +108,8 @@ const Navbar: React.FC = () => {
   const links: NavLinkProps[] = [
     { href: "#About", label: "About" },
     { href: "#Journey", label: "Journey" },
-    { href: "#skill", label: "Skill" },
-    { href: "#projects", label: "Projects" },
+    { href: "#Skill", label: "Skill" },
+    { href: "#Projects", label: "Projects" },
   ];
 
   return (

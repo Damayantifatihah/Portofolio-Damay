@@ -92,7 +92,8 @@ function SkillRow({ reverse = false }: { reverse?: boolean }) {
 
 function Skill() {
   return (
-    <section style={{ padding: "80px 0", backgroundColor: "#FFF8F6", overflow: "hidden" }}>
+    <section id="Skill"
+    style={{ padding: "80px 0", backgroundColor: "#FFF8F6", overflow: "hidden" }}>
       <style>{marqueeStyles}</style>
 
       {/* Heading */}

@@ -92,7 +92,8 @@ function ContactCard({ item }: { item: ContactItem }) {
 
 function Contact() {
   return (
-    <section style={{ backgroundColor: "#FFF8F6", padding: "80px 100px", textAlign: "center" }}>
+    <section id="contact"
+    style={{ backgroundColor: "#FFF8F6", padding: "80px 100px", textAlign: "center" }}>
       <h2 style={{ margin: 0, fontSize: "2rem", fontWeight: 400, color: "#5C3D3D", fontFamily: "Georgia, serif" }}>
         Let's <em style={{ color: "#D97B8A", fontStyle: "italic" }}>Connect</em>
       </h2>

@@ -20,7 +20,7 @@ const SelfSection: React.FC = () => {
   const [dlHovered, setDlHovered] = useState(false);
 
   return (
-    <section
+    <section id="About"
       style={{
         minHeight: "80vh",
         display: "flex",

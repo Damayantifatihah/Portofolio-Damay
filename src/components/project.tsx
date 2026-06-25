@@ -176,7 +176,8 @@ function Projects() {
   const [mainProject, ...restProjects] = filtered;
 
   return (
-    <section style={{ padding: "80px 100px", backgroundColor: "#FFF8F6" }}>
+    <section id="Projects"
+    style={{ padding: "80px 100px", backgroundColor: "#FFF8F6" }}>
       <style>{hoverCardStyle}</style>
 
       {/* Heading */}

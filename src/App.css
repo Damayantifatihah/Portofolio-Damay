@@ -1,0 +1,24 @@
+/* ===== GLOBAL RESET ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ===== SCROLL BEHAVIOR (INI PENTING) ===== */
+html {
+  scroll-behavior: smooth;
+}
+
+/* ===== BODY SETUP ===== */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #FFF8F6;
+  color: #333;
+  overflow-x: hidden;
+}
+
+/* ===== BIAR SECTION TIDAK KETUTUP NAVBAR ===== */
+section {
+  scroll-margin-top: 90px;
+}

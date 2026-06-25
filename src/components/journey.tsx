@@ -114,7 +114,8 @@ function TimelineCard({ item }: { item: TimelineItem }) {
 
 function Journey() {
   return (
-    <section style={{ padding: "80px 100px", backgroundColor: "#FFF8F6" }}>
+    <section id="Journey"
+    style={{ padding: "80px 100px", backgroundColor: "#FFF8F6" }}>
       {/* Heading */}
       <div style={{ textAlign: "center", marginBottom: "56px" }}>
         <h2
