@@ -30,7 +30,7 @@ function App() {
   }
 
   return (
-    <BrowserRouter basename="/Portofolio-may">
+    <BrowserRouter>
       <Navbar />
       <Routes>
         <Route path="/" element={<AboutPage />} />
