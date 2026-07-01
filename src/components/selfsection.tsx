@@ -13,8 +13,11 @@ const blobKeyframes = `
     0%, 100% { transform: translateY(0px); }
     50%       { transform: translateY(-12px); }
   }
+  @keyframes glowPulse {
+    0%, 100% { opacity: 0.35; transform: scale(1); }
+    50%      { opacity: 0.55; transform: scale(1.08); }
+  }
 `;
-
 
 const SelfSection: React.FC = () => {
   const [dlHovered, setDlHovered] = useState(false);
@@ -27,7 +30,7 @@ const SelfSection: React.FC = () => {
         justifyContent: "space-between",
         alignItems: "center",
         padding: "60px 80px 60px 80px",
-        backgroundColor: "#FFF8F6",
+        backgroundColor: "#FFFBF3",
         gap: "40px",
       }}
     >
@@ -39,10 +42,10 @@ const SelfSection: React.FC = () => {
           style={{
             margin: "0 0 14px",
             fontSize: "11px",
-            color: "#D4A0A8",
+            color: "#4A7BAC",
             letterSpacing: "2.5px",
             textTransform: "uppercase",
-            fontWeight: 500,
+            fontWeight: 600,
           }}
         >
           Software Engineer Student
@@ -59,7 +62,7 @@ const SelfSection: React.FC = () => {
           }}
         >
           Hai, I'm{" "}
-          <span style={{ color: "#D97B8A", fontStyle: "italic" }}>
+          <span style={{ color: "#F38081", fontStyle: "italic" }}>
             Damayanti
           </span>
         </h1>
@@ -68,7 +71,7 @@ const SelfSection: React.FC = () => {
           style={{
             width: "40px",
             height: "2px",
-            background: "#F2C4C8",
+            background: "#EFD780",
             borderRadius: "2px",
             margin: "16px 0 18px",
           }}
@@ -78,7 +81,7 @@ const SelfSection: React.FC = () => {
           style={{
             margin: "0 0 28px",
             fontSize: "14px",
-            color: "#B08880",
+            color: "#8A7C74",
             lineHeight: 1.85,
           }}
         >
@@ -87,14 +90,15 @@ const SelfSection: React.FC = () => {
           frontend solutions with a touch of soft minimalism.
         </p>
 
-
         <button
           onMouseEnter={() => setDlHovered(true)}
           onMouseLeave={() => setDlHovered(false)}
           style={{
-            background: dlHovered ? "#D97B8A" : "#FFF8F6",
-            color: dlHovered ? "#FFF8F6" : "#C07878",
-            border: `1.5px solid ${dlHovered ? "#D97B8A" : "#E8C0C0"}`,
+            background: dlHovered
+              ? "linear-gradient(135deg, #F38081, #F79977)"
+              : "#FFFBF3",
+            color: dlHovered ? "#FFFFFF" : "#F38081",
+            border: `1.5px solid ${dlHovered ? "transparent" : "#F3B8B8"}`,
             padding: "12px 24px",
             borderRadius: "50px",
             fontSize: "13px",
@@ -104,7 +108,8 @@ const SelfSection: React.FC = () => {
             alignItems: "center",
             gap: "8px",
             letterSpacing: "0.3px",
-            transition: "background 0.2s, color 0.2s, border-color 0.2s",
+            boxShadow: dlHovered ? "0 6px 18px rgba(243,128,129,0.35)" : "none",
+            transition: "background 0.25s, color 0.25s, border-color 0.25s, box-shadow 0.25s",
           }}
         >
           <FaDownload style={{ fontSize: "13px" }} />
@@ -119,17 +124,38 @@ const SelfSection: React.FC = () => {
           width: "380px",
           height: "420px",
           flexShrink: 0,
-          animation: "floatUp 6s ease-in-out infinite",
         }}
       >
+        {/* Glow belakang blob */}
         <div
           style={{
             position: "absolute",
-            inset: 0,
-            backgroundColor: "#F9D8DF",
-            animation: "blobMove 8s ease-in-out infinite",
+            inset: "-20px",
+            borderRadius: "50%",
+            background: "radial-gradient(circle, #EFD780 0%, transparent 70%)",
+            animation: "glowPulse 5s ease-in-out infinite",
+            zIndex: 0,
           }}
         />
+        <div
+          style={{
+            position: "relative",
+            width: "100%",
+            height: "100%",
+            animation: "floatUp 6s ease-in-out infinite",
+            zIndex: 1,
+          }}
+        >
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              background: "linear-gradient(160deg, #BDD8F1 0%, #F38081 100%)",
+              animation: "blobMove 8s ease-in-out infinite",
+              boxShadow: "0 20px 50px rgba(243,128,129,0.25)",
+            }}
+          />
+        </div>
       </div>
     </section>
   );

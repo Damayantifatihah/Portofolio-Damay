@@ -22,6 +22,19 @@ const skills: Skill[] = [
   { name: "Figma",        icon: <SiFigma /> },
 ];
 
+const skillColorMap: Record<string, { bg: string; color: string }> = {
+  "MySQL":        { bg: "#E9F2FC", color: "#4A7BAC" }, // Soft Baby Blue
+  "React":        { bg: "#FDEAEA", color: "#C05656" }, // Coral Reef
+  "React Native": { bg: "#FDEAEA", color: "#C05656" },
+  "Next.js":      { bg: "#F1F4DC", color: "#7C8A3A" }, // Squeeze of Lime
+  "Express":      { bg: "#F1F4DC", color: "#7C8A3A" },
+  "TypeScript":   { bg: "#FBF3DC", color: "#A98A2E" }, // Meyer Lemon
+  "JavaScript":   { bg: "#FBF3DC", color: "#A98A2E" },
+  "PostgreSQL":   { bg: "#E9F2FC", color: "#4A7BAC" },
+  "Supabase":     { bg: "#F1F4DC", color: "#7C8A3A" },
+  "Figma":        { bg: "#FDEEE5", color: "#C97142" }, // Salmon Pink
+};
+
 const marqueeStyles = `
   @keyframes marquee-left  { from { transform: translateX(0); }    to { transform: translateX(-50%); } }
   @keyframes marquee-right { from { transform: translateX(-50%); } to { transform: translateX(0); }    }
@@ -32,7 +45,7 @@ const marqueeStyles = `
 
   .skill-card {
     background: white;
-    border: 1px solid #F2DDD9;
+    border: 1px solid #F6E4DE;
     border-radius: 50px;
     padding: 10px 20px 10px 12px;
     display: flex;
@@ -40,38 +53,39 @@ const marqueeStyles = `
     gap: 10px;
     flex-shrink: 0;
     white-space: nowrap;
-    box-shadow: 0 2px 10px rgba(217,123,138,0.07);
+    box-shadow: 0 2px 10px rgba(243,128,129,0.08);
     transition: transform 0.2s, box-shadow 0.2s;
   }
   .skill-card:hover {
-    transform: scale(1.06);
-    box-shadow: 0 6px 18px rgba(217,123,138,0.15);
+    transform: scale(1.06) translateY(-2px);
+    box-shadow: 0 8px 20px rgba(243,128,129,0.18);
   }
 
   .skill-icon {
     width: 32px;
     height: 32px;
     border-radius: 50%;
-    background: #FDE8EC;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 15px;
     flex-shrink: 0;
-    color: #D97B8A;
   }
 
   .skill-name {
     font-size: 13px;
     font-weight: 500;
-    color: #7A5058;
+    color: #6B5A54;
   }
 `;
 
 function SkillCard({ skill }: { skill: Skill }) {
+  const c = skillColorMap[skill.name] ?? { bg: "#FDEAEA", color: "#C05656" };
   return (
     <div className="skill-card">
-      <div className="skill-icon">{skill.icon}</div>
+      <div className="skill-icon" style={{ background: c.bg, color: c.color }}>
+        {skill.icon}
+      </div>
       <span className="skill-name">{skill.name}</span>
     </div>
   );
@@ -105,12 +119,12 @@ function Skill() {
           color: "#5C3D3D",
           fontFamily: "Georgia, serif",
         }}>
-          My <em style={{ color: "#D97B8A", fontStyle: "italic" }}>Skills</em>
+          My <em style={{ color: "#F38081", fontStyle: "italic" }}>Skills</em>
         </h2>
         <div style={{
           width: "36px",
           height: "2px",
-          background: "#F2C4C8",
+          background: "#EFD780",
           borderRadius: "2px",
           margin: "14px auto 0",
         }} />

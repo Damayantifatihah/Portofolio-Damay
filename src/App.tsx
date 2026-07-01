@@ -1,22 +1,44 @@
+import { useState } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./components/navbar";
 import SelfSection from "./components/selfsection";
-import Journey from "./components/journey";
 import Skill from "./components/skill";
-import Archievements from "./components/archievements";
+import Journey from "./components/journey";
+import Achievements from "./components/archievements";
 import Project from "./components/project";
 import Contact from "./components/contact";
+import SectionDivider from "./components/dividerSection";
+import IntroAnimation from "./components/introAnimate";
 
-function App() {
+function AboutPage() {
   return (
     <>
-      <Navbar />
       <SelfSection />
-      <Journey />
+      <SectionDivider />
       <Skill />
-      <Archievements />
-      <Project />
-      <Contact/>
+      <SectionDivider />
+      <Journey />
     </>
+  );
+}
+
+function App() {
+  const [showIntro, setShowIntro] = useState(true);
+
+  if (showIntro) {
+    return <IntroAnimation onFinish={() => setShowIntro(false)} />;
+  }
+
+  return (
+    <BrowserRouter basename="/Portofolio-may">
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<AboutPage />} />
+        <Route path="/achievements" element={<Achievements />} />
+        <Route path="/projects" element={<Project />} />
+        <Route path="/contact" element={<Contact />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

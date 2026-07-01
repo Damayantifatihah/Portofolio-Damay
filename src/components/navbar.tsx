@@ -1,9 +1,8 @@
-import { useState } from "react";
+import { NavLink, Link } from "react-router-dom";
 
-interface NavLinkProps {
-  href: string;
+interface NavItem {
+  to: string;
   label: string;
-  active?: boolean;
 }
 
 const navStyle: React.CSSProperties = {
@@ -11,9 +10,12 @@ const navStyle: React.CSSProperties = {
   justifyContent: "space-between",
   alignItems: "center",
   padding: "0 48px",
-  backgroundColor: "#FFF8F6",
-  borderBottom: "1px solid #F2DDD9",
-  height: "66px",
+  background: "rgba(255, 253, 246, 0.75)",
+  backdropFilter: "blur(14px)",
+  WebkitBackdropFilter: "blur(14px)",
+  borderBottom: "1px solid rgba(243, 128, 129, 0.15)",
+  boxShadow: "0 4px 24px rgba(243, 128, 129, 0.06)",
+  height: "68px",
   width: "100%",
   boxSizing: "border-box",
   position: "sticky",
@@ -24,117 +26,168 @@ const navStyle: React.CSSProperties = {
 const logoWrapStyle: React.CSSProperties = {
   display: "flex",
   alignItems: "center",
-  gap: "8px",
-};
-
-const logoTextStyle: React.CSSProperties = {
-  fontSize: "18px",
-  fontWeight: 500,
-  color: "#C07878",
-  letterSpacing: "0.8px",
-  fontFamily: "Georgia, serif",
+  gap: "9px",
 };
 
 const menuStyle: React.CSSProperties = {
   display: "flex",
-  gap: "32px",
+  gap: "36px",
   listStyle: "none",
   margin: 0,
   padding: 0,
   alignItems: "center",
 };
 
-function NavLink({ href, label, active = false }: NavLinkProps) {
-  const [hovered, setHovered] = useState(false);
-  const highlighted = active || hovered;
+const navFontStyles = `
+  .navlink-item {
+    position: relative;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 6px 2px;
+    letter-spacing: 0.3px;
+    transition: color 0.25s ease;
+  }
 
-  const linkStyle: React.CSSProperties = {
-    textDecoration: "none",
-    color: highlighted ? "#D97B8A" : "#C0968A",
-    fontSize: "14px",
-    fontWeight: 500,
-    paddingBottom: "4px",
-    borderBottom: `1.5px solid ${highlighted ? "#D97B8A" : "transparent"}`,
-    transition: "color 0.2s, border-color 0.2s",
-    letterSpacing: "0.3px",
-  };
+  .navlink-item::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: 0%;
+    height: 2px;
+    background: linear-gradient(90deg, #F38081, #EFD780);
+    border-radius: 2px;
+    transform: translateX(-50%);
+    transition: width 0.28s ease;
+  }
 
+  .navlink-item:hover::after,
+  .navlink-item.active::after {
+    width: 100%;
+  }
+
+  .navlink-item:hover {
+    color: #4A7BAC !important;
+  }
+
+  .logo-text-grad {
+    background: linear-gradient(90deg, #4A7BAC, #F38081);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 19px;
+    font-weight: 600;
+    letter-spacing: 0.8px;
+    font-family: Georgia, serif;
+  }
+
+  .cta-btn {
+    text-decoration: none;
+    color: #FFFFFF;
+    background: linear-gradient(135deg, #F38081, #F79977);
+    padding: 8px 22px;
+    border-radius: 50px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.4px;
+    display: inline-block;
+    box-shadow: 0 4px 14px rgba(243, 128, 129, 0.35);
+    transition: transform 0.22s ease, box-shadow 0.22s ease, filter 0.22s ease;
+  }
+
+  .cta-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(243, 128, 129, 0.45);
+    filter: brightness(1.05);
+  }
+
+  .cta-btn.active {
+    background: linear-gradient(135deg, #4A7BAC, #F38081);
+  }
+
+  .logo-icon {
+    transition: transform 0.4s ease;
+  }
+
+  .logo-link:hover .logo-icon {
+    transform: rotate(20deg) scale(1.1);
+  }
+`;
+
+function NavItemLink({ to, label }: NavItem) {
   return (
     <li>
-      <a
-        href={href}
-        style={linkStyle}
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
+      <NavLink
+        to={to}
+        end={to === "/"}
+        className={({ isActive }) => `navlink-item${isActive ? " active" : ""}`}
+        style={({ isActive }) => ({
+          color: isActive ? "#4A7BAC" : "#9C8880",
+        })}
       >
         {label}
-      </a>
+      </NavLink>
     </li>
   );
 }
 
-function CtaButton({ href, label }: { href: string; label: string }) {
-  const [hovered, setHovered] = useState(false);
-
-  const style: React.CSSProperties = {
-    textDecoration: "none",
-    border: "1.5px solid #D97B8A",
-    color: hovered ? "#FFF8F6" : "#D97B8A",
-    backgroundColor: hovered ? "#D97B8A" : "transparent",
-    padding: "7px 20px",
-    borderRadius: "50px",
-    fontSize: "13px",
-    fontWeight: 500,
-    transition: "background 0.2s, color 0.2s",
-    letterSpacing: "0.4px",
-    display: "inline-block",
-  };
-
+function CtaButton({ to, label }: { to: string; label: string }) {
   return (
     <li>
-      <a
-        href={href}
-        style={style}
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
+      <NavLink
+        to={to}
+        className={({ isActive }) => `cta-btn${isActive ? " active" : ""}`}
       >
         {label}
-      </a>
+      </NavLink>
     </li>
   );
 }
 
 const Navbar: React.FC = () => {
-  const links: NavLinkProps[] = [
-    { href: "#About", label: "About" },
-    { href: "#Journey", label: "Journey" },
-    { href: "#Skill", label: "Skill" },
-    { href: "#Archievements", label: "Archievements" },
-    { href: "#Projects", label: "Projects" },
+  const links: NavItem[] = [
+    { to: "/", label: "About" },
+    { to: "/achievements", label: "Achievements" },
+    { to: "/projects", label: "Projects" },
   ];
 
   return (
     <nav style={navStyle}>
-      {/* Logo */}
-      <div style={logoWrapStyle}>
-        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+      <style>{navFontStyles}</style>
+
+      <Link to="/" className="logo-link" style={{ ...logoWrapStyle, textDecoration: "none" }}>
+        <svg
+          className="logo-icon"
+          width="19"
+          height="19"
+          viewBox="0 0 18 18"
+          fill="none"
+          aria-hidden="true"
+          style={{ filter: "drop-shadow(0 0 6px rgba(243,128,129,.5))" }}
+        >
+          <defs>
+            <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#EFD780" />
+              <stop offset="100%" stopColor="#F38081" />
+            </linearGradient>
+          </defs>
           <path
             d="M9 1 L10.8 6.6 L17 6.6 L12 10.2 L13.8 15.8 L9 12.2 L4.2 15.8 L6 10.2 L1 6.6 L7.2 6.6 Z"
-            fill="#E8A0A8"
-            stroke="#E8A0A8"
+            fill="url(#logoGrad)"
+            stroke="url(#logoGrad)"
             strokeWidth="0.5"
             strokeLinejoin="round"
           />
         </svg>
-        <span style={logoTextStyle}>portfolio</span>
-      </div>
+        <span className="logo-text-grad">portfolio</span>
+      </Link>
 
-      {/* Menu */}
       <ul style={menuStyle}>
         {links.map((link) => (
-          <NavLink key={link.href} {...link} />
+          <NavItemLink key={link.to} {...link} />
         ))}
-        <CtaButton href="#contact" label="Contact" />
+        <CtaButton to="/contact" label="Contact" />
       </ul>
     </nav>
   );
