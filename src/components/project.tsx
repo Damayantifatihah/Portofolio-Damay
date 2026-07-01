@@ -10,41 +10,66 @@ interface Project {
   label: string;
   github?: string;
   demo?: string;
+  image?: string;
 }
 
-const categories = ["All", "Web Design", "Development", "App Design"];
+const categories = ["All", "Website", "Design", "Application"];
 
 const projects: Project[] = [
   {
-    title: "LaporinAja",
+    title: "Pengaduan Masyarakat",
     description:
       "Platform pelaporan masyarakat berbasis web untuk melaporkan isu di lingkungan sekitar secara cepat dan transparan.",
     tags: ["Next.js", "TypeScript", "Tailwind CSS"],
-    category: ["Web Design", "Development"],
+    category: ["Website"],
     bg: "#FDE8EC",
+    label: "Web · Development",
+    github: "#",
+    demo: "https://laporin-aja-smoky.vercel.app/",
+  },
+  {
+    title: "E-Commerce Sederhana",
+    description:
+      "Website toko online sederhana dengan fitur katalog produk, keranjang belanja, dan proses checkout.",
+    tags: ["React", "Tailwind CSS", "Node.js"],
+    category: ["Website"],
+    bg: "#F9D8DF",
     label: "Web · Development",
     github: "#",
     demo: "#",
   },
   {
-    title: "LaporinAja Mobile",
+    title: "Perpustakaan Digital",
     description:
-      "Versi mobile dari LaporinAja, dibangun dengan React Native & Expo agar masyarakat bisa melapor dari ponsel.",
-    tags: ["React Native", "Expo"],
-    category: ["App Design", "Development"],
-    bg: "#F9D8DF",
-    label: "App · Development",
-    github: "#",
-  },
-  {
-    title: "Admin Dashboard",
-    description:
-      "Panel pengelolaan laporan, kategori, dan statistik untuk admin & super admin LaporinAja.",
-    tags: ["Next.js", "Tailwind CSS"],
-    category: ["Web Design", "Development"],
+      "Aplikasi perpustakaan digital untuk pencarian, peminjaman, dan pengelolaan koleksi buku secara online.",
+    tags: ["Laravel", "MySQL", "Bootstrap"],
+    category: ["Website"],
     bg: "#F5E0E4",
     label: "Web · Development",
     github: "#",
+    demo: "#",
+  },
+  {
+    title: "Glow & Flow",
+    description:
+      "Rancangan UI/UX untuk aplikasi Glow & Flow, mencakup user flow, wireframe, hingga high-fidelity design.",
+    tags: ["Figma", "UI/UX Design"],
+    category: ["Design"],
+    bg: "#F2CDD4",
+    label: "UI/UX Design",
+    demo: "https://www.figma.com/design/w5MnV5Ji4Fj3etEUADzNZg/WebShop?node-id=0-1&t=RyHAgAPQ9EOtWjtY-1",
+  },
+  {
+    title: "Landing Page Grab",
+    description:
+      "Landing page bertema layanan transportasi & pengiriman, dibuat sebagai project submission Dicoding.",
+    tags: ["HTML", "CSS", "JavaScript"],
+    category: ["Website"],
+    bg: "#FDE8EC",
+    label: "Web · Development",
+    demo: "https://dicoding-project-grab.vercel.app/",
+    // Ganti dengan screenshot asli, misal simpan di /public/projects/grab.png lalu isi "/projects/grab.png"
+    image: "",
   },
 ];
 
@@ -80,9 +105,24 @@ function FilterTab({ label, active, onClick }: { label: string; active: boolean;
 }
 
 function ProjectCard({ project, large = false }: { project: Project; large?: boolean }) {
+  const clickThrough = project.demo || project.github;
+
+  const hasSingleLink = Boolean(project.demo) !== Boolean(project.github); // exactly one of the two
+  const singleHref = project.demo || project.github;
+
+  const Wrapper = hasSingleLink ? "a" : "div";
+  const wrapperExtraProps = hasSingleLink
+    ? { href: singleHref, target: "_blank", rel: "noopener noreferrer" }
+    : {
+        onClick: () => {
+          if (clickThrough) window.open(clickThrough, "_blank", "noopener,noreferrer");
+        },
+      };
+
   return (
-    <div
+    <Wrapper
       className="project-card"
+      {...wrapperExtraProps}
       style={{
         position: "relative",
         backgroundColor: project.bg,
@@ -93,9 +133,16 @@ function ProjectCard({ project, large = false }: { project: Project; large?: boo
         alignItems: "center",
         justifyContent: "center",
         overflow: "hidden",
+        cursor: clickThrough ? "pointer" : "default",
+        backgroundImage: project.image ? `url(${project.image})` : undefined,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        textDecoration: "none",
       }}
     >
-      <FaCode style={{ fontSize: large ? "3rem" : "2rem", color: "#D97B8A", opacity: 0.2 }} />
+      {!project.image && (
+        <FaCode style={{ fontSize: large ? "3rem" : "2rem", color: "#D97B8A", opacity: 0.2 }} />
+      )}
 
       <div
         className="project-overlay"
@@ -144,24 +191,42 @@ function ProjectCard({ project, large = false }: { project: Project; large?: boo
         </div>
         <div style={{ display: "flex", gap: "16px" }}>
           {project.demo && (
-            <a href={project.demo} style={{
-              color: "#FDE8EC", fontSize: "13px", fontWeight: 500,
-              textDecoration: "none", display: "flex", alignItems: "center", gap: "6px",
-            }}>
-              <FaArrowUpRightFromSquare /> Live Demo
-            </a>
+            hasSingleLink ? (
+              <span style={{
+                color: "#FDE8EC", fontSize: "13px", fontWeight: 500,
+                display: "flex", alignItems: "center", gap: "6px",
+              }}>
+                <FaArrowUpRightFromSquare /> {project.category.includes("Design") ? "View Design" : "Live Demo"}
+              </span>
+            ) : (
+              <a href={project.demo} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()} style={{
+                color: "#FDE8EC", fontSize: "13px", fontWeight: 500,
+                textDecoration: "none", display: "flex", alignItems: "center", gap: "6px",
+              }}>
+                <FaArrowUpRightFromSquare /> Live Demo
+              </a>
+            )
           )}
           {project.github && (
-            <a href={project.github} style={{
-              color: "#FDE8EC", fontSize: "13px", fontWeight: 500,
-              textDecoration: "none", display: "flex", alignItems: "center", gap: "6px",
-            }}>
-              <FaGithub /> Code
-            </a>
+            hasSingleLink ? (
+              <span style={{
+                color: "#FDE8EC", fontSize: "13px", fontWeight: 500,
+                display: "flex", alignItems: "center", gap: "6px",
+              }}>
+                <FaGithub /> Code
+              </span>
+            ) : (
+              <a href={project.github} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()} style={{
+                color: "#FDE8EC", fontSize: "13px", fontWeight: 500,
+                textDecoration: "none", display: "flex", alignItems: "center", gap: "6px",
+              }}>
+                <FaGithub /> Code
+              </a>
+            )
           )}
         </div>
       </div>
-    </div>
+    </Wrapper>
   );
 }
 

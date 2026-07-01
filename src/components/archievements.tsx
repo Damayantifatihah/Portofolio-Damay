@@ -20,7 +20,7 @@ const Achievements: React.FC = () => {
 
   return (
     <section
-      id="achievements"
+      id="Archievements"
       style={{ padding: "100px 8%", backgroundColor: "#FDF8F9" }}
     >
       <style>{`
