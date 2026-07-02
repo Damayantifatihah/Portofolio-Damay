@@ -53,40 +53,48 @@ const Achievements: React.FC = () => {
   return (
     <section
       id="Archievements"
-      style={{ padding: "100px 8%", backgroundColor: "#FFF8F6" }}
+      className="ach-section"
     >
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap');
 
+        .ach-heading-grad {
+          background: linear-gradient(90deg, #4A7BAC, #F38081);
+          -webkit-background-clip: text;
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
+        }
+
         .ach-grid {
-          column-count: 3;
-          column-gap: 26px;
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 26px;
           max-width: 980px;
           margin: 0 auto;
         }
         @media (max-width: 760px) {
-          .ach-grid { column-count: 2; }
+          .ach-grid { grid-template-columns: repeat(2, 1fr); }
         }
         @media (max-width: 500px) {
-          .ach-grid { column-count: 1; }
+          .ach-grid { grid-template-columns: 1fr; }
         }
         .ach-card {
-          display: inline-block;
+          display: flex;
+          flex-direction: column;
           width: 100%;
-          break-inside: avoid;
-          margin-bottom: 26px;
+          height: 100%;
           background: #FFFBF3;
           border-radius: 20px;
           border: 1px solid #F6E4DE;
           overflow: hidden;
           cursor: pointer;
-          box-shadow: 0 2px 14px rgba(243,128,129,0.08);
+          box-shadow: 0 2px 14px rgba(74,123,172,0.07);
           transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
         }
         .ach-card:hover {
           transform: translateY(-5px);
-          border-color: #F3B8B8;
-          box-shadow: 0 12px 28px rgba(243,128,129,0.18);
+          border-color: #9DBEE0;
+          box-shadow: 0 12px 28px rgba(74,123,172,0.18);
         }
         .ach-card:hover .ach-overlay {
           opacity: 1;
@@ -94,19 +102,21 @@ const Achievements: React.FC = () => {
         .ach-image-wrap {
           position: relative;
           width: 100%;
+          aspect-ratio: 4 / 3;
           overflow: hidden;
-          background: linear-gradient(160deg, #FDEAEA 0%, #FBF3DC 100%);
-          line-height: 0;
+          background: linear-gradient(160deg, #EAF4FC 0%, #FBF3DC 100%);
         }
         .ach-image-wrap img {
           width: 100%;
-          height: auto;
+          height: 100%;
+          object-fit: cover;
+          object-position: center;
           display: block;
         }
         .ach-overlay {
           position: absolute;
           inset: 0;
-          background: rgba(92, 61, 61, 0.45);
+          background: rgba(42, 61, 82, 0.5);
           opacity: 0;
           transition: opacity 0.3s ease;
           display: flex;
@@ -120,6 +130,10 @@ const Achievements: React.FC = () => {
         .ach-card-body {
           padding: 18px 20px 20px;
           text-align: center;
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
         }
         .ach-card-title {
           font-family: 'Playfair Display', serif;
@@ -128,12 +142,16 @@ const Achievements: React.FC = () => {
           color: #5C3D3D;
           margin: 0 0 14px;
           line-height: 1.5;
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
         }
         .ach-badge {
           font-size: 11px;
           font-weight: 500;
-          color: #C05656;
-          background: #FDEAEA;
+          color: #4A7BAC;
+          background: #EAF4FC;
           border-radius: 20px;
           padding: 4px 12px;
           letter-spacing: 0.5px;
@@ -143,7 +161,7 @@ const Achievements: React.FC = () => {
         .ach-lightbox {
           position: fixed;
           inset: 0;
-          background: rgba(40, 25, 20, 0.85);
+          background: rgba(30, 35, 45, 0.82);
           display: flex;
           align-items: center;
           justify-content: center;
@@ -159,20 +177,54 @@ const Achievements: React.FC = () => {
           0% { transform: scale(0.92); opacity: 0; }
           100% { transform: scale(1); opacity: 1; }
         }
+
+        .ach-section {
+          padding: 100px 8%;
+          background-color: #FFF8F6;
+          box-sizing: border-box;
+        }
+
+        .ach-heading {
+          font-family: 'Playfair Display', serif;
+          font-size: 36px;
+          font-weight: 400;
+          margin: 0 0 14px;
+        }
+
+        @media (max-width: 760px) {
+          .ach-section {
+            padding: 72px 6%;
+          }
+          .ach-heading {
+            font-size: 30px;
+          }
+        }
+
+        @media (max-width: 500px) {
+          .ach-section {
+            padding: 56px 5%;
+          }
+          .ach-heading {
+            font-size: 25px;
+          }
+          .ach-grid {
+            gap: 18px;
+          }
+          .ach-lightbox {
+            padding: 12px;
+          }
+          .ach-modal-body {
+            padding: 18px 18px 22px !important;
+          }
+        }
       `}</style>
 
       <div style={{ textAlign: "center", marginBottom: "52px" }}>
-        <h2 style={{
-          fontFamily: "'Playfair Display', serif",
-          fontSize: "36px",
-          fontWeight: 400,
-          color: "#5C3D3D",
-          margin: "0 0 14px",
-        }}>
-          Achievements
+        <h2 className="ach-heading">
+          <span className="ach-heading-grad">Achievements</span>
         </h2>
         <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "10px" }}>
-          <div style={{ width: "48px", height: "1px", background: "#F3B8B8" }} />
+          <div style={{ width: "48px", height: "1px", background: "#BDD8F1" }} />
           <div style={{ width: "6px", height: "6px", borderRadius: "50%", background: "#F38081" }} />
           <div style={{ width: "48px", height: "1px", background: "#F3B8B8" }} />
         </div>
@@ -216,7 +268,7 @@ const Achievements: React.FC = () => {
           >
             <div style={{
               position: "relative",
-              background: "linear-gradient(160deg, #FDEAEA 0%, #FBF3DC 100%)",
+              background: "linear-gradient(160deg, #EAF4FC 0%, #FBF3DC 100%)",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
@@ -243,7 +295,7 @@ const Achievements: React.FC = () => {
                   height: "32px",
                   borderRadius: "50%",
                   border: "none",
-                  background: "rgba(92,61,61,0.55)",
+                  background: "rgba(74,123,172,0.6)",
                   color: "#fff",
                   fontSize: "16px",
                   cursor: "pointer",
@@ -252,12 +304,12 @@ const Achievements: React.FC = () => {
                 ✕
               </button>
             </div>
-            <div style={{ padding: "24px 26px 28px", overflowY: "auto" }}>
+            <div style={{ padding: "24px 26px 28px", overflowY: "auto" }} className="ach-modal-body">
               <span style={{
                 fontSize: "11px",
                 fontWeight: 500,
-                color: "#C05656",
-                background: "#FDEAEA",
+                color: "#4A7BAC",
+                background: "#EAF4FC",
                 borderRadius: "20px",
                 padding: "4px 12px",
                 letterSpacing: "0.5px",

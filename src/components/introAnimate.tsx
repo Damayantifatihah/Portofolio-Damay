@@ -1,15 +1,28 @@
 import { useEffect, useState } from "react";
 
 const introStyles = `
-  @keyframes sparkleIn {
-    0% { transform: scale(0) rotate(-45deg); opacity: 0; }
-    60% { transform: scale(1.15) rotate(10deg); opacity: 1; }
-    100% { transform: scale(1) rotate(0deg); opacity: 1; }
+  @keyframes spineGrow {
+    0% { transform: scaleY(0); opacity: 0; }
+    60% { transform: scaleY(1.08); opacity: 1; }
+    100% { transform: scaleY(1); opacity: 1; }
   }
 
-  @keyframes sparkleSpin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+  @keyframes armGrow {
+    0% { transform: scaleX(0); opacity: 0; }
+    60% { transform: scaleX(1.1); opacity: 1; }
+    100% { transform: scaleX(1); opacity: 1; }
+  }
+
+  @keyframes bowlGrow {
+    0% { transform: scale(0); opacity: 0; }
+    55% { transform: scale(1.12); opacity: 1; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+
+  @keyframes badgeIn {
+    0% { transform: scale(0) rotate(-15deg); opacity: 0; }
+    60% { transform: scale(1.12) rotate(4deg); opacity: 1; }
+    100% { transform: scale(1) rotate(0deg); opacity: 1; }
   }
 
   @keyframes ringPulse {
@@ -68,10 +81,25 @@ const introStyles = `
   }
 
   .intro-gradient-text {
-    background: linear-gradient(90deg, #F38081, #F79977, #EFD780);
+    background: linear-gradient(90deg, #4A7BAC, #F38081, #EFD780);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
+  }
+
+  @keyframes handWave {
+    0%, 100% { transform: rotate(0deg); }
+    15% { transform: rotate(18deg); }
+    30% { transform: rotate(-10deg); }
+    45% { transform: rotate(18deg); }
+    60% { transform: rotate(-6deg); }
+    75% { transform: rotate(10deg); }
+  }
+
+  .wave-emoji {
+    display: inline-block;
+    transform-origin: 70% 70%;
+    animation: handWave 1.8s ease-in-out 1.4s infinite;
   }
 `;
 
@@ -90,15 +118,16 @@ const petals = [
   { left: "94%", size: 7, delay: "1.7s", duration: "5.2s", shape: "petal" },
 ];
 
+// Warna diselaraskan dengan navbar: biru #4A7BAC, coral #F38081, salmon #F79977, lemon #EFD780
 const petalColors = [
+  "#4A7BAC", // Navbar Blue
+  "#EFD780", // Meyer Lemon
+  "#F38081", // Coral Reef
+  "#C8CE72", // Squeeze of Lime
+  "#4A7BAC", // Navbar Blue
   "#F38081", // Coral Reef
   "#EFD780", // Meyer Lemon
-  "#BDD8F1", // Soft Baby Blue
-  "#C8CE72", // Squeeze of Lime
   "#F79977", // Salmon Pink
-  "#F38081", // Coral Reef
-  "#EFD780", // Meyer Lemon
-  "#C8CE72", // Squeeze of Lime
 ];
 
 function IntroAnimation({ onFinish }: IntroAnimationProps) {
@@ -157,8 +186,8 @@ function IntroAnimation({ onFinish }: IntroAnimationProps) {
           width: "260px",
           height: "260px",
           borderRadius: "50%",
-          background: "#BDD8F1",
-          opacity: 0.3,
+          background: "#4A7BAC",
+          opacity: 0.25,
           filter: "blur(70px)",
           animation: "blobFloat 7s ease-in-out infinite 1s",
         }}
@@ -201,54 +230,109 @@ function IntroAnimation({ onFinish }: IntroAnimationProps) {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          animation:
-            "sparkleIn 0.9s cubic-bezier(0.34,1.56,0.64,1) forwards",
+          width: "96px",
+          height: "96px",
+          animation: "badgeIn 0.8s cubic-bezier(0.34,1.56,0.64,1) forwards",
         }}
       >
-        {/* Pulsing ring di belakang sparkle */}
+        {/* Pulsing ring di belakang monogram, warna navbar */}
         <div
           style={{
             position: "absolute",
-            width: "56px",
-            height: "56px",
+            width: "64px",
+            height: "64px",
             borderRadius: "50%",
-            border: "2px solid #F79977",
+            border: "2px solid #4A7BAC",
             animation: "ringPulse 2.2s ease-out infinite",
           }}
         />
         <div
           style={{
             position: "absolute",
-            width: "56px",
-            height: "56px",
+            width: "64px",
+            height: "64px",
             borderRadius: "50%",
-            border: "2px solid #EFD780",
+            border: "2px solid #F38081",
             animation: "ringPulse 2.2s ease-out infinite 1.1s",
           }}
         />
 
-        <svg
-          width="56"
-          height="56"
-          viewBox="0 0 18 18"
-          fill="none"
+        {/* Badge bulat solid di belakang huruf */}
+        <div
           style={{
-            animation: "sparkleSpin 3.5s linear infinite",
-            filter: "drop-shadow(0 0 10px rgba(243,128,129,.7))",
+            position: "absolute",
+            width: "72px",
+            height: "72px",
+            borderRadius: "50%",
+            background: "linear-gradient(135deg, #FFFDF6, #FBF3E8)",
+            boxShadow:
+              "0 6px 20px rgba(74,123,172,.25), 0 2px 8px rgba(243,128,129,.25)",
           }}
+        />
+
+        <svg
+          width="72"
+          height="72"
+          viewBox="0 0 72 72"
+          style={{ position: "relative", filter: "drop-shadow(0 2px 6px rgba(74,123,172,.3))" }}
         >
           <defs>
-            <linearGradient id="sparkleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#EFD780" />
+            <linearGradient id="dfGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#4A7BAC" />
               <stop offset="100%" stopColor="#F38081" />
             </linearGradient>
           </defs>
+
+          {/* Garis tengah (spine) yang dipakai bersama oleh D dan F */}
+          <rect
+            x="25"
+            y="10"
+            width="7"
+            height="52"
+            rx="3.5"
+            fill="url(#dfGrad)"
+            style={{
+              transformOrigin: "28.5px 36px",
+              animation: "spineGrow 0.5s cubic-bezier(0.34,1.56,0.64,1) 0.1s both",
+            }}
+          />
+
+          {/* Lengan atas F, menempel di spine */}
+          <rect
+            x="25"
+            y="10"
+            width="27"
+            height="7"
+            rx="3.2"
+            fill="url(#dfGrad)"
+            style={{
+              transformOrigin: "25px 13.5px",
+              animation: "armGrow 0.4s cubic-bezier(0.34,1.56,0.64,1) 0.35s both",
+            }}
+          />
+
+          {/* Lengan tengah F, menempel di spine */}
+          <rect
+            x="25"
+            y="27"
+            width="21"
+            height="7"
+            rx="3.2"
+            fill="url(#dfGrad)"
+            style={{
+              transformOrigin: "25px 30.5px",
+              animation: "armGrow 0.4s cubic-bezier(0.34,1.56,0.64,1) 0.5s both",
+            }}
+          />
+
+          {/* Perut D, menempel di spine bagian bawah */}
           <path
-            d="M9 1 L10.8 6.6 L17 6.6 L12 10.2 L13.8 15.8 L9 12.2 L4.2 15.8 L6 10.2 L1 6.6 L7.2 6.6 Z"
-            fill="url(#sparkleGrad)"
-            stroke="url(#sparkleGrad)"
-            strokeWidth="0.5"
-            strokeLinejoin="round"
+            d="M32,35 C55,35 58,44 58,48 C58,52 55,61 32,61 Z"
+            fill="url(#dfGrad)"
+            style={{
+              transformOrigin: "32px 48px",
+              animation: "bowlGrow 0.5s cubic-bezier(0.34,1.56,0.64,1) 0.6s both",
+            }}
           />
         </svg>
       </div>
@@ -265,17 +349,18 @@ function IntroAnimation({ onFinish }: IntroAnimationProps) {
           textShadow: "0 2px 8px rgba(255,255,255,.4)",
         }}
       >
-        Hai,{" "}
+        Welcome,{" "}
         <span className="intro-gradient-text" style={{ fontWeight: 600 }}>
-          selamat datang
+          glad you're here
         </span>{" "}
         <span
+          className="wave-emoji"
           style={{
             color: "#F38081",
             fontStyle: "italic",
           }}
         >
-          🌸
+          👋
         </span>
       </p>
     </div>

@@ -9,6 +9,7 @@ import Project from "./components/project";
 import Contact from "./components/contact";
 import SectionDivider from "./components/dividerSection";
 import IntroAnimation from "./components/introAnimate";
+import Contributions from "./components/contributions";
 
 function AboutPage() {
   return (
@@ -18,6 +19,8 @@ function AboutPage() {
       <Skill />
       <SectionDivider />
       <Journey />
+      <Contributions />
+      <Contact />
     </>
   );
 }
