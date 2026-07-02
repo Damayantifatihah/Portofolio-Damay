@@ -183,36 +183,40 @@ const SelfSection: React.FC = () => {
             lineHeight: 1.85,
           }}
         >
-          Building digital experiences that bridge the gap between technical
-          complexity and human intuition. Focused on crafting clean, scalable
-          frontend solutions with a touch of soft minimalism.
+          I'm someone who likes to keep learning new things, whether it's a
+          design trick, a new tool, or just a better way to do something I
+          already know. I enjoy making things look clean and neat, and I
+          always try to figure out how to make a design or a piece of code
+          simpler to understand. I'm still learning a lot, but I'm having
+          fun along the way.
         </p>
 
-        <button
-          onMouseEnter={() => setDlHovered(true)}
-          onMouseLeave={() => setDlHovered(false)}
-          style={{
-            background: dlHovered
-              ? "linear-gradient(135deg, #F38081, #F79977)"
-              : "#FFFBF3",
-            color: dlHovered ? "#FFFFFF" : "#F38081",
-            border: `1.5px solid ${dlHovered ? "transparent" : "#F3B8B8"}`,
-            padding: "12px 24px",
-            borderRadius: "50px",
-            fontSize: "13px",
-            fontWeight: 500,
-            cursor: "pointer",
-            display: "inline-flex",
-            alignItems: "center",
-            gap: "8px",
-            letterSpacing: "0.3px",
-            boxShadow: dlHovered ? "0 6px 18px rgba(243,128,129,0.35)" : "none",
-            transition: "background 0.25s, color 0.25s, border-color 0.25s, box-shadow 0.25s",
-          }}
+        <a
+          href="/cv/CV_NurFatihahDamayanti_XII-RPL-5.pdf"
+          download
+          style={{ textDecoration: "none" }}
         >
-          <FaDownload style={{ fontSize: "13px" }} />
-          Download CV
-        </button>
+          <button
+            onMouseEnter={() => setDlHovered(true)}
+            onMouseLeave={() => setDlHovered(false)}
+            style={{
+              background: dlHovered
+                ? "linear-gradient(135deg, #F38081, #F79977)"
+                : "#FFFBF3",
+              color: dlHovered ? "#FFFFFF" : "#F38081",
+              border: `1.5px solid ${dlHovered ? "transparent" : "#F3B8B8"}`,
+              padding: "12px 24px",
+              borderRadius: "50px",
+              cursor: "pointer",
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "8px",
+            }}
+          >
+            <FaDownload />
+            Download CV
+          </button>
+        </a>
       </div>
 
       {/* FOTO / BLOB */}

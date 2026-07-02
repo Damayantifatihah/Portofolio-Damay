@@ -101,6 +101,36 @@ const introStyles = `
     transform-origin: 70% 70%;
     animation: handWave 1.8s ease-in-out 1.4s infinite;
   }
+
+  .intro-badge {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 96px;
+    height: 96px;
+    animation: badgeIn 0.8s cubic-bezier(0.34,1.56,0.64,1) forwards;
+  }
+
+  .intro-text {
+    margin-top: 18px;
+    font-family: Georgia, serif;
+    font-size: clamp(1.2rem, 5.5vw, 1.8rem);
+    font-weight: 400;
+    color: #374151;
+    opacity: 0;
+    text-align: center;
+    padding: 0 24px;
+    max-width: 92vw;
+    animation: textReveal 0.8s ease 0.6s forwards;
+    text-shadow: 0 2px 8px rgba(255,255,255,.4);
+  }
+
+  @media (max-width: 480px) {
+    .intro-badge {
+      transform: scale(0.75);
+    }
+  }
 `;
 
 interface IntroAnimationProps {
@@ -134,8 +164,8 @@ function IntroAnimation({ onFinish }: IntroAnimationProps) {
   const [exiting, setExiting] = useState(false);
 
   useEffect(() => {
-    const exitTimer = setTimeout(() => setExiting(true), 2100);
-    const removeTimer = setTimeout(() => onFinish(), 2800);
+    const exitTimer = setTimeout(() => setExiting(true), 3000);
+    const removeTimer = setTimeout(() => onFinish(), 3700);
 
     return () => {
       clearTimeout(exitTimer);
@@ -224,17 +254,7 @@ function IntroAnimation({ onFinish }: IntroAnimationProps) {
         />
       ))}
 
-      <div
-        style={{
-          position: "relative",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          width: "96px",
-          height: "96px",
-          animation: "badgeIn 0.8s cubic-bezier(0.34,1.56,0.64,1) forwards",
-        }}
-      >
+      <div className="intro-badge">
         {/* Pulsing ring di belakang monogram, warna navbar */}
         <div
           style={{
@@ -337,18 +357,7 @@ function IntroAnimation({ onFinish }: IntroAnimationProps) {
         </svg>
       </div>
 
-      <p
-        style={{
-          marginTop: "18px",
-          fontFamily: "Georgia, serif",
-          fontSize: "1.8rem",
-          fontWeight: 400,
-          color: "#374151",
-          opacity: 0,
-          animation: "textReveal 0.8s ease 0.6s forwards",
-          textShadow: "0 2px 8px rgba(255,255,255,.4)",
-        }}
-      >
+      <p className="intro-text">
         Welcome,{" "}
         <span className="intro-gradient-text" style={{ fontWeight: 600 }}>
           glad you're here

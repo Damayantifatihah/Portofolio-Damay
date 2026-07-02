@@ -14,7 +14,7 @@ const timelineData: TimelineItem[] = [
   {
     year: "2023 — 2024",
     description:
-      "Mulai menjelajahi dunia web development dengan mempelajari dasar-dasar HTML dan CSS. Membuat beberapa proyek sederhana menggunakan HTML, native CSS, dan sedikit JavaScript untuk memahami struktur website dan interaktivitas halaman.",
+      "Started exploring web development by learning the fundamentals of HTML and CSS. Built several simple projects using HTML, native CSS, and a bit of JavaScript to understand website structure and page interactivity.",
     side: "right",
     tags: ["HTML", "CSS", "JavaScript"],
     icon: FaCode,
@@ -23,7 +23,7 @@ const timelineData: TimelineItem[] = [
   {
     year: "2025",
     description:
-      "Mulai belajar menggunakan React Vite dan memahami konsep penting seperti components, props dan state. Mulai menggunakan MySQL sebagai database pada saat test uji level.",
+      "Started learning React with Vite and grasped key concepts like components, props, and state. Began using MySQL as a database during a competency test.",
     side: "left",
     tags: ["React", "Vite"],
     icon: FaLayerGroup,
@@ -32,7 +32,7 @@ const timelineData: TimelineItem[] = [
   {
     year: "2026",
     description:
-      "Mulai menggunakan TypeScript untuk menulis kode yang lebih terstruktur dan aman. Mempelajari Express.js untuk membangun backend, serta mencoba database seperti PostgreSQL dan MySQL dalam beberapa proyek.",
+      "Started using TypeScript to write more structured and type-safe code. Learned Express.js for backend development, and explored databases like PostgreSQL and MySQL across several projects.",
     side: "right",
     tags: ["TypeScript", "Express", "PostgreSQL", "MySQL"],
     icon: FaServer,

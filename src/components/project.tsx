@@ -7,10 +7,6 @@ import Perpustakaan from "../assets/perpus-mockup.png";
 import GlowFlow from "../assets/uiux-mockup.png";
 import Grab from "../assets/gojek-mockup.png";
 
-// Kalau sudah punya screenshot project, import di sini lalu isi field `image` di bawah.
-// Contoh: import laporinMobileImg from "../assets/projects/laporin-mobile.png";
-// import laporinImg from "../assets/projects/laporin.png";
-
 interface Project {
   title: string;
   description: string;
@@ -42,9 +38,9 @@ const tagColorMap: Record<string, { bg: string; color: string }> = {
 
 const projects: Project[] = [
   {
-    title: "Pengaduan Masyarakat (Mobile)",
+    title: "Community Reporting (Mobile)",
     description:
-      "Versi mobile dari platform Laporin Aja, dioptimalkan agar masyarakat bisa membuat laporan langsung dari HP dengan cepat dan mudah.",
+      "Mobile version of the Laporin Aja platform, optimized so people can submit reports directly from their phone quickly and easily.",
     tags: ["Next.js", "TypeScript", "Responsive UI"],
     category: ["Website", "Application"],
     bg: "#FDE8EC",
@@ -54,21 +50,21 @@ const projects: Project[] = [
     image: LaporMobile, 
   },
   {
-    title: "Pengaduan Masyarakat (Website)",
+    title: "Community Reporting (Website)",
     description:
-      "Platform pelaporan masyarakat berbasis web untuk melaporkan isu di lingkungan sekitar secara cepat dan transparan.",
+      "A web-based community reporting platform for quickly and transparently reporting local issues.",
     tags: ["Next.js", "TypeScript", "Tailwind CSS"],
     category: ["Website"],
     bg: "#FDE8EC",
     label: "Web · Development",
     github: "https://github.com/Damayantifatihah/laporin-aja",
     demo: "https://laporin-aja-smoky.vercel.app/",
-    image: LaporWeb, // isi dengan import screenshot di atas
+    image: LaporWeb,
   },
   {
-    title: "E-Commerce Sederhana",
+    title: "Simple E-Commerce",
     description:
-      "Website toko online sederhana dengan fitur katalog produk, keranjang belanja, dan proses checkout.",
+      "A simple online store website featuring a product catalog, shopping cart, and checkout process.",
     tags: ["React", "Tailwind CSS", "Fast API"],
     category: ["Website"],
     bg: "#F9D8DF",
@@ -78,9 +74,9 @@ const projects: Project[] = [
     image: Ecommerce,
   },
   {
-    title: "Perpustakaan Digital",
+    title: "Digital Library",
     description:
-      "Aplikasi perpustakaan digital untuk pencarian, peminjaman, dan pengelolaan koleksi buku secara online.",
+      "A digital library application for searching, borrowing, and managing book collections online.",
     tags: ["Next.js", "MySQL", "Tailwind CSS", "JavaScript"],
     category: ["Website"],
     bg: "#F5E0E4",
@@ -92,7 +88,7 @@ const projects: Project[] = [
   {
     title: "Glow & Flow",
     description:
-      "Rancangan UI/UX untuk aplikasi Glow & Flow, mencakup user flow, wireframe, hingga high-fidelity design.",
+      "UI/UX design for the Glow & Flow app, covering user flow, wireframes, through to high-fidelity designs.",
     tags: ["Figma", "Canva"],
     category: ["Design"],
     bg: "#F2CDD4",
@@ -101,9 +97,9 @@ const projects: Project[] = [
     image: GlowFlow,
   },
   {
-    title: "Landing Page Grab",
+    title: "Grab Landing Page",
     description:
-      "Landing page bertema layanan transportasi & pengiriman, dibuat sebagai project submission Dicoding.",
+      "A landing page themed around transportation & delivery services, built as a Dicoding course submission.",
     tags: ["HTML", "CSS", "JavaScript"],
     category: ["Website"],
     bg: "#FDE8EC",
@@ -424,7 +420,7 @@ function Projects() {
 
       {/* Grid */}
       {filtered.length === 0 ? (
-        <p style={{ textAlign: "center", color: "#9C8880" }}>Belum ada project di kategori ini.</p>
+        <p style={{ textAlign: "center", color: "#9C8880" }}>No projects in this category yet.</p>
       ) : (
         <div className="projects-grid">
           {filtered.map((p) => (

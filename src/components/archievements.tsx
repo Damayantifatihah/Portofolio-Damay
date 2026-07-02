@@ -24,7 +24,7 @@ const achievements: Achievement[] = [
   {
     id: 2,
     title: "Multi-Platform Application Development Competency Test",
-    date: "2025",
+    date: "2026",
     description:
       "Competency test certificate for multi-platform application development, assessing the ability to design interfaces and application logic across devices.",
     image: cert2,
@@ -32,7 +32,7 @@ const achievements: Achievement[] = [
   {
     id: 3,
     title: "Industrial Visit to PT. Inti Persero and Institut Teknologi Bandung",
-    date: "2024",
+    date: "2025",
     description:
       "Documentation of an industrial visit as part of workplace exposure and technology research in the telecommunications field.",
     image: cert3,
@@ -272,13 +272,15 @@ const Achievements: React.FC = () => {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
+              flexShrink: 0,
+              maxHeight: "45vh",
             }}>
               <img
                 src={activeItem.image}
                 alt={activeItem.title}
                 style={{
                   width: "100%",
-                  maxHeight: "460px",
+                  maxHeight: "45vh",
                   objectFit: "contain",
                   display: "block",
                   padding: "20px",
@@ -304,7 +306,10 @@ const Achievements: React.FC = () => {
                 ✕
               </button>
             </div>
-            <div style={{ padding: "24px 26px 28px", overflowY: "auto" }} className="ach-modal-body">
+            <div
+              style={{ padding: "24px 26px 28px", overflowY: "auto", flex: 1, minHeight: 0 }}
+              className="ach-modal-body"
+            >
               <span style={{
                 fontSize: "11px",
                 fontWeight: 500,

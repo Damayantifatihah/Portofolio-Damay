@@ -303,10 +303,10 @@ const Navbar: React.FC = () => {
       <style>{navFontStyles}</style>
 
       <div className="navbar-inner">
-        <Link to="/" className="logo-link" style={{ ...logoWrapStyle, textDecoration: "none" }}>
+        <div className="logo-link" style={logoWrapStyle}>
           <DfLogo />
           <span className="logo-text-grad">portfolio</span>
-        </Link>
+        </div>
 
         <button
           type="button"

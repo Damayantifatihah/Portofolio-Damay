@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from "react";
 import {
   SiHtml5, SiCss, SiMysql, SiReact, SiNextdotjs, SiExpress,
   SiTypescript, SiJavascript, SiPostgresql, SiSupabase, SiFigma,
@@ -113,17 +114,6 @@ const skillStyles = `
     to { transform: rotate(360deg); }
   }
 
-  .skill-tile:hover {
-    animation-play-state: paused;
-    transform: translateY(-8px) scale(1.05);
-    box-shadow: 0 18px 34px rgba(243,128,129,0.2);
-    border-color: transparent;
-  }
-
-  .skill-tile:hover::before {
-    opacity: 1;
-  }
-
   .skill-tile-icon {
     width: 52px;
     height: 52px;
@@ -135,15 +125,44 @@ const skillStyles = `
     transition: transform 0.35s ease;
   }
 
-  .skill-tile:hover .skill-tile-icon {
-    transform: scale(1.12) rotate(-6deg);
-  }
-
   .skill-tile-name {
     font-size: 13px;
     font-weight: 600;
     color: #5C3D3D;
     text-align: center;
+  }
+
+  /* Efek hover HANYA untuk device yang beneran punya mouse/kursor */
+  @media (hover: hover) and (pointer: fine) {
+    .skill-tile:hover {
+      animation-play-state: paused;
+      transform: translateY(-8px) scale(1.05);
+      box-shadow: 0 18px 34px rgba(243,128,129,0.2);
+      border-color: transparent;
+    }
+
+    .skill-tile:hover::before {
+      opacity: 1;
+    }
+
+    .skill-tile:hover .skill-tile-icon {
+      transform: scale(1.12) rotate(-6deg);
+    }
+  }
+
+  /* Untuk HP/touch device: efek jalan otomatis pas kartu masuk layar */
+  .skill-tile.in-view {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 14px 28px rgba(243,128,129,0.16);
+    border-color: transparent;
+  }
+
+  .skill-tile.in-view::before {
+    opacity: 1;
+  }
+
+  .skill-tile.in-view .skill-tile-icon {
+    transform: scale(1.08) rotate(-4deg);
   }
 
   @media (max-width: 820px) {
@@ -161,6 +180,27 @@ const skillStyles = `
 function SkillTile({ skill, index }: { skill: Skill; index: number }) {
   const c = skillColorMap[skill.name] ?? { bg: "#FDEAEA", color: "#C05656" };
   const Icon = skill.icon;
+  const tileRef = useRef<HTMLDivElement>(null);
+  const [inView, setInView] = useState(false);
+
+  useEffect(() => {
+    const el = tileRef.current;
+    if (!el) return;
+
+    // Cuma aktif buat device tanpa hover (HP/tablet)
+    const isTouchDevice = window.matchMedia("(hover: none), (pointer: coarse)").matches;
+    if (!isTouchDevice) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setInView(entry.isIntersecting);
+      },
+      { threshold: 0.5 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <div
@@ -168,7 +208,8 @@ function SkillTile({ skill, index }: { skill: Skill; index: number }) {
       style={{ animationDelay: `${index * 0.06}s` }}
     >
       <div
-        className="skill-tile"
+        ref={tileRef}
+        className={`skill-tile${inView ? " in-view" : ""}`}
         style={{
           ["--tile-accent" as string]: c.color,
           animationDelay: `${(index % 5) * 0.4}s`,
