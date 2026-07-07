@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { FaDownload } from "react-icons/fa";
+import { useLanguage } from "./bahasa/languageContext";
 // Ganti path di bawah ini sesuai lokasi & nama file foto kamu di folder assets
 import profilePhoto from "../assets/damaycantik.jpeg";
+
 
 const blobKeyframes = `
   @keyframes blobMove {
@@ -128,6 +130,7 @@ const blobKeyframes = `
 
 const SelfSection: React.FC = () => {
   const [dlHovered, setDlHovered] = useState(false);
+  const { t } = useLanguage();
 
   return (
     <section id="About" className="self-section">
@@ -145,7 +148,7 @@ const SelfSection: React.FC = () => {
             fontWeight: 600,
           }}
         >
-          Software Engineer Student
+          {t.selfRole}
         </p>
 
         <h1
@@ -158,9 +161,9 @@ const SelfSection: React.FC = () => {
             fontFamily: "Georgia, serif",
           }}
         >
-          Hai, I'm{" "}
+          {t.selfGreeting}{" "}
           <span style={{ color: "#F38081", fontStyle: "italic" }}>
-            Damayanti
+            {t.selfName}
           </span>
         </h1>
 
@@ -183,12 +186,7 @@ const SelfSection: React.FC = () => {
             lineHeight: 1.85,
           }}
         >
-          I'm someone who likes to keep learning new things, whether it's a
-          design trick, a new tool, or just a better way to do something I
-          already know. I enjoy making things look clean and neat, and I
-          always try to figure out how to make a design or a piece of code
-          simpler to understand. I'm still learning a lot, but I'm having
-          fun along the way.
+          {t.selfDesc}
         </p>
 
         <a
@@ -214,7 +212,7 @@ const SelfSection: React.FC = () => {
             }}
           >
             <FaDownload />
-            Download CV
+            {t.selfDownloadCV}
           </button>
         </a>
       </div>

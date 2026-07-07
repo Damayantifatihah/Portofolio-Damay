@@ -1,3 +1,5 @@
+import { useLanguage } from "./bahasa/languageContext";
+
 const contributionsStyles = `
   .contrib-section {
     padding: 80px 100px;
@@ -73,6 +75,7 @@ const contributionsStyles = `
 `;
 
 function Contributions() {
+  const { t } = useLanguage();
   const githubUsername = "Damayantifatihah";
 
   return (
@@ -81,18 +84,6 @@ function Contributions() {
 
       {/* Heading */}
       <div style={{ textAlign: "center", marginBottom: "40px" }}>
-        <p
-          style={{
-            margin: "0 0 8px",
-            fontSize: "11px",
-            fontWeight: 600,
-            letterSpacing: "2.5px",
-            textTransform: "uppercase",
-            color: "#F79977",
-          }}
-        >
-          Activity
-        </p>
         <h2
           style={{
             margin: 0,
@@ -102,9 +93,9 @@ function Contributions() {
             fontFamily: "Georgia, serif",
           }}
         >
-          GitHub{" "}
+          {t.contribHeadingPrefix}{" "}
           <em style={{ color: "#F38081", fontStyle: "italic" }}>
-            Contributions
+            {t.contribHeadingHighlight}
           </em>
         </h2>
         <div
@@ -123,7 +114,7 @@ function Contributions() {
             color: "#B08880",
           }}
         >
-          A snapshot of my coding activity on GitHub throughout the year
+          {t.contribSubtitle}
         </p>
       </div>
 
@@ -143,7 +134,7 @@ function Contributions() {
             rel="noopener noreferrer"
             className="contrib-btn"
           >
-            View GitHub Profile
+            {t.contribBtn}
             <span aria-hidden="true">→</span>
           </a>
         </div>

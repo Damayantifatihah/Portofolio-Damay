@@ -1,5 +1,7 @@
 import { FaCode, FaLayerGroup, FaServer } from "react-icons/fa6";
 import type { IconType } from "react-icons";
+import { useLanguage } from "./bahasa/languageContext";
+import type { TranslationType } from "./bahasa/languageContext";
 
 interface TimelineItem {
   year: string;
@@ -10,35 +12,34 @@ interface TimelineItem {
   accent: string;
 }
 
-const timelineData: TimelineItem[] = [
-  {
-    year: "2023 — 2024",
-    description:
-      "Started exploring web development by learning the fundamentals of HTML and CSS. Built several simple projects using HTML, native CSS, and a bit of JavaScript to understand website structure and page interactivity.",
-    side: "right",
-    tags: ["HTML", "CSS", "JavaScript"],
-    icon: FaCode,
-    accent: "#F38081",
-  },
-  {
-    year: "2025",
-    description:
-      "Started learning React with Vite and grasped key concepts like components, props, and state. Began using MySQL as a database during a competency test.",
-    side: "left",
-    tags: ["React", "Vite"],
-    icon: FaLayerGroup,
-    accent: "#EFD780",
-  },
-  {
-    year: "2026",
-    description:
-      "Started using TypeScript to write more structured and type-safe code. Learned Express.js for backend development, and explored databases like PostgreSQL and MySQL across several projects.",
-    side: "right",
-    tags: ["TypeScript", "Express", "PostgreSQL", "MySQL"],
-    icon: FaServer,
-    accent: "#BDD8F1",
-  },
-];
+function getTimelineData(t: TranslationType): TimelineItem[] {
+  return [
+    {
+      year: "2023 — 2024",
+      description: t.journeyDesc2023,
+      side: "right",
+      tags: ["HTML", "CSS", "JavaScript"],
+      icon: FaCode,
+      accent: "#F38081",
+    },
+    {
+      year: "2025",
+      description: t.journeyDesc2025,
+      side: "left",
+      tags: ["React", "Vite"],
+      icon: FaLayerGroup,
+      accent: "#EFD780",
+    },
+    {
+      year: "2026",
+      description: t.journeyDesc2026,
+      side: "right",
+      tags: ["TypeScript", "Express", "PostgreSQL", "MySQL"],
+      icon: FaServer,
+      accent: "#BDD8F1",
+    },
+  ];
+}
 
 const tagColorMap: Record<string, { bg: string; color: string }> = {
   "HTML":       { bg: "#FDEAEA", color: "#C05656" },
@@ -299,24 +300,15 @@ function TimelineCard({ item }: { item: TimelineItem }) {
 }
 
 function Journey() {
+  const { t } = useLanguage();
+  const timelineData = getTimelineData(t);
+
   return (
     <section id="Journey" className="journey-section">
       <style>{journeyStyles}</style>
 
       {/* Heading */}
       <div style={{ textAlign: "center", marginBottom: "56px" }}>
-        <p
-          style={{
-            margin: "0 0 8px",
-            fontSize: "11px",
-            fontWeight: 600,
-            letterSpacing: "2.5px",
-            textTransform: "uppercase",
-            color: "#F79977",
-          }}
-        >
-          Timeline
-        </p>
         <h2
           style={{
             margin: 0,
@@ -326,8 +318,10 @@ function Journey() {
             fontFamily: "Georgia, serif",
           }}
         >
-          My{" "}
-          <em style={{ color: "#F38081", fontStyle: "italic" }}>Journey</em>
+          {t.journeyHeadingPrefix}{" "}
+          <em style={{ color: "#F38081", fontStyle: "italic" }}>
+            {t.journeyHeadingHighlight}
+          </em>
         </h2>
         <div
           style={{

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { LanguageProvider } from "./components/bahasa/languageContext";
 import Navbar from "./components/navbar";
 import SelfSection from "./components/selfsection";
 import Skill from "./components/skill";
@@ -33,15 +34,17 @@ function App() {
   }
 
   return (
-    <BrowserRouter>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<AboutPage />} />
-        <Route path="/achievements" element={<Achievements />} />
-        <Route path="/projects" element={<Project />} />
-        <Route path="/contact" element={<Contact />} />
-      </Routes>
-    </BrowserRouter>
+    <LanguageProvider>
+      <BrowserRouter>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<AboutPage />} />
+          <Route path="/achievements" element={<Achievements />} />
+          <Route path="/projects" element={<Project />} />
+          <Route path="/contact" element={<Contact />} />
+        </Routes>
+      </BrowserRouter>
+    </LanguageProvider>
   );
 }
 

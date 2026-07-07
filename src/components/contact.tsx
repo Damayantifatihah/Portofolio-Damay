@@ -1,5 +1,6 @@
 import { FaGithub, FaInstagram, FaLinkedin } from "react-icons/fa";
 import { FaEnvelope } from "react-icons/fa6";
+import { useLanguage } from "./bahasa/languageContext";
 
 interface ContactItem {
   label: string;
@@ -231,22 +232,11 @@ function ContactCard({ item, index }: { item: ContactItem; index: number }) {
 }
 
 function Contact() {
+  const { t } = useLanguage();
+
   return (
     <section id="contact" className="contact-section">
       <style>{contactStyles}</style>
-
-      <p
-        style={{
-          margin: "0 0 8px",
-          fontSize: "11px",
-          fontWeight: 600,
-          letterSpacing: "2.5px",
-          textTransform: "uppercase",
-          color: "#F79977",
-        }}
-      >
-        Get In Touch
-      </p>
 
       <h2
         style={{
@@ -257,7 +247,10 @@ function Contact() {
           fontFamily: "Georgia, serif",
         }}
       >
-        Let's <em style={{ color: "#F38081", fontStyle: "italic" }}>Connect</em>
+        {t.contactHeadingPrefix}{" "}
+        <em style={{ color: "#F38081", fontStyle: "italic" }}>
+          {t.contactHeadingHighlight}
+        </em>
       </h2>
 
       <div
@@ -279,7 +272,7 @@ function Contact() {
           maxWidth: "380px",
         }}
       >
-        Got an idea, a project, or just want to say hi? Let's make something great together! 🚀
+        {t.contactSubtitle}
       </p>
 
       {/* Grid kontak */}
@@ -293,7 +286,7 @@ function Contact() {
       <div className="contact-footer-wrap">
         <div className="contact-footer-line" />
         <p className="contact-footer">
-          Made with <span className="contact-footer-heart">🌸</span> by Damayanti
+          {t.contactFooter} <span className="contact-footer-heart">🌸</span> {t.contactFooterBy}
         </p>
       </div>
     </section>

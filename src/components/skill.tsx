@@ -7,6 +7,7 @@ import {
 import { DiIllustrator } from "react-icons/di";
 import { VscVscode } from "react-icons/vsc";
 import type { IconType } from "react-icons";
+import { useLanguage } from "./bahasa/languageContext";
 
 interface Skill {
   name: string;
@@ -132,7 +133,6 @@ const skillStyles = `
     text-align: center;
   }
 
-  /* Efek hover HANYA untuk device yang beneran punya mouse/kursor */
   @media (hover: hover) and (pointer: fine) {
     .skill-tile:hover {
       animation-play-state: paused;
@@ -150,7 +150,6 @@ const skillStyles = `
     }
   }
 
-  /* Untuk HP/touch device: efek jalan otomatis pas kartu masuk layar */
   .skill-tile.in-view {
     transform: translateY(-4px) scale(1.02);
     box-shadow: 0 14px 28px rgba(243,128,129,0.16);
@@ -187,7 +186,6 @@ function SkillTile({ skill, index }: { skill: Skill; index: number }) {
     const el = tileRef.current;
     if (!el) return;
 
-    // Cuma aktif buat device tanpa hover (HP/tablet)
     const isTouchDevice = window.matchMedia("(hover: none), (pointer: coarse)").matches;
     if (!isTouchDevice) return;
 
@@ -225,6 +223,8 @@ function SkillTile({ skill, index }: { skill: Skill; index: number }) {
 }
 
 function Skill() {
+  const { t } = useLanguage();
+
   return (
     <section id="Skill" className="skill-section">
       <style>{skillStyles}</style>
@@ -240,7 +240,8 @@ function Skill() {
             fontFamily: "Georgia, serif",
           }}
         >
-          My <em style={{ color: "#F38081", fontStyle: "italic" }}>Skills</em>
+          {t.skillHeadingPrefix}{" "}
+          <em style={{ color: "#F38081", fontStyle: "italic" }}>{t.skillHeadingHighlight}</em>
         </h2>
         <div
           style={{
@@ -252,7 +253,7 @@ function Skill() {
           }}
         />
         <p style={{ margin: "12px 0 0", fontSize: "13.5px", color: "#B08880" }}>
-          Technologies and tools I use to build applications
+          {t.skillSubtitle}
         </p>
       </div>
 

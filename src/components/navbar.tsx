@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { useEffect } from "react";
+import { useLanguage } from "./bahasa/languageContext";
 
 interface NavItem {
   to: string;
@@ -125,6 +126,24 @@ const navFontStyles = `
     align-items: center;
   }
 
+  .lang-toggle-btn {
+    background: rgba(74, 123, 172, 0.08);
+    border: 1px solid rgba(74, 123, 172, 0.25);
+    color: #4A7BAC;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    padding: 6px 14px;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background 0.22s ease, transform 0.22s ease;
+  }
+
+  .lang-toggle-btn:hover {
+    background: rgba(74, 123, 172, 0.16);
+    transform: translateY(-1px);
+  }
+
   .hamburger-btn {
     display: none;
     background: none;
@@ -192,7 +211,7 @@ const navFontStyles = `
     }
 
     .menu-list.open {
-      max-height: 320px;
+      max-height: 380px;
       opacity: 1;
       pointer-events: auto;
     }
@@ -215,6 +234,12 @@ const navFontStyles = `
       width: 100%;
       box-sizing: border-box;
     }
+
+    .lang-toggle-btn {
+      margin-top: 6px;
+      width: 100%;
+      text-align: center;
+    }
   }
 `;
 
@@ -234,13 +259,9 @@ function DfLogo() {
           <stop offset="100%" stopColor="#F38081" />
         </linearGradient>
       </defs>
-      {/* Spine bersama D & F */}
       <rect x="25" y="10" width="7" height="52" rx="3.5" fill="url(#navDfGrad)" />
-      {/* Lengan atas F */}
       <rect x="25" y="10" width="27" height="7" rx="3.2" fill="url(#navDfGrad)" />
-      {/* Lengan tengah F */}
       <rect x="25" y="27" width="21" height="7" rx="3.2" fill="url(#navDfGrad)" />
-      {/* Perut D */}
       <path
         d="M32,35 C55,35 58,44 58,48 C58,52 55,61 32,61 Z"
         fill="url(#navDfGrad)"
@@ -284,16 +305,16 @@ function CtaButton({ to, label, onClick }: { to: string; label: string; onClick?
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
+  const { lang, toggleLang, t } = useLanguage();
 
-  // Tutup menu mobile setiap kali pindah halaman
   useEffect(() => {
     setIsOpen(false);
   }, [location.pathname]);
 
   const links: NavItem[] = [
-    { to: "/", label: "About" },
-    { to: "/achievements", label: "Achievements" },
-    { to: "/projects", label: "Projects" },
+    { to: "/", label: t.navAbout },
+    { to: "/achievements", label: t.navAchievements },
+    { to: "/projects", label: t.navProjects },
   ];
 
   const closeMenu = () => setIsOpen(false);
@@ -324,7 +345,12 @@ const Navbar: React.FC = () => {
           {links.map((link) => (
             <NavItemLink key={link.to} {...link} onClick={closeMenu} />
           ))}
-          <CtaButton to="/contact" label="Contact" onClick={closeMenu} />
+          <CtaButton to="/contact" label={t.navContact} onClick={closeMenu} />
+          <li>
+            <button type="button" className="lang-toggle-btn" onClick={toggleLang}>
+              {lang === "en" ? "ID" : "EN"}
+            </button>
+          </li>
         </ul>
       </div>
     </nav>
