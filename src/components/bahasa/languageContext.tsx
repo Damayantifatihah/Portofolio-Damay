@@ -41,6 +41,26 @@ const translations = {
       "Got an idea, a project, or just want to say hi? Let's make something great together! 🚀",
     contactFooter: "Made with",
     contactFooterBy: "by Damayanti",
+
+    // Achievements section
+    achHeading: "Achievements",
+    achSubtitleNote: "certificate",
+    achViewDetails: "VIEW DETAILS",
+
+    ach1Title: "Simple E-commerce Website Competency Test",
+    ach1Desc:
+      "Certificate of completion for a simple e-commerce website competency test, covering product catalog structure through the basic checkout flow.",
+
+    ach2Title: "Multi-Platform Application Development Competency Test",
+    ach2Desc:
+      "Competency test certificate for multi-platform application development, assessing the ability to design interfaces and application logic across devices.",
+
+    ach3Title: "Industrial Visit to PT. Inti Persero and Institut Teknologi Bandung",
+    ach3Desc:
+      "Documentation of an industrial visit as part of workplace exposure and technology research in the telecommunications field.",
+
+    ach4Title: "Certificate in Web Programming Fundamentals",
+    ach4Desc: "Certificate in Web Programming Fundamentals.",
   },
   id: {
     navAbout: "Tentang",
@@ -79,6 +99,26 @@ const translations = {
       "Punya ide, proyek, atau cuma mau say hi? Yuk bikin sesuatu yang keren bareng!",
     contactFooter: "Dibuat dengan",
     contactFooterBy: "oleh Damayanti",
+
+    // Achievements section
+    achHeading: "Pencapaian",
+    achSubtitleNote: "sertifikat",
+    achViewDetails: "LIHAT DETAIL",
+
+    ach1Title: "Uji Kompetensi Website E-commerce Sederhana",
+    ach1Desc:
+      "Sertifikat kelulusan uji kompetensi pembuatan website e-commerce sederhana, mencakup struktur katalog produk hingga alur checkout dasar.",
+
+    ach2Title: "Uji Kompetensi Pengembangan Aplikasi Multi-Platform",
+    ach2Desc:
+      "Sertifikat uji kompetensi pengembangan aplikasi multi-platform, menilai kemampuan merancang antarmuka dan logika aplikasi di berbagai perangkat.",
+
+    ach3Title: "Kunjungan Industri ke PT. Inti Persero dan Institut Teknologi Bandung",
+    ach3Desc:
+      "Dokumentasi kunjungan industri sebagai bagian dari pengenalan dunia kerja dan riset teknologi di bidang telekomunikasi.",
+
+    ach4Title: "Sertifikat Dasar-Dasar Pemrograman Web",
+    ach4Desc: "Sertifikat Dasar-Dasar Pemrograman Web.",
   },
 };
 

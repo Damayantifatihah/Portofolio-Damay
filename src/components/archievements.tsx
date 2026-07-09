@@ -3,6 +3,7 @@ import cert1 from "../assets/KLS10.jpeg";
 import cert2 from "../assets/KLS11.jpeg";
 import cert3 from "../assets/PT.jpeg";
 import cert4 from "../assets/dicoding.jpeg";
+import { useLanguage } from "./bahasa/languageContext";
 
 interface Achievement {
   id: number;
@@ -12,43 +13,40 @@ interface Achievement {
   image: string;
 }
 
-const achievements: Achievement[] = [
-  {
-    id: 1,
-    title: "Simple E-commerce Website Competency Test",
-    date: "2025",
-    description:
-      "Certificate of completion for a simple e-commerce website competency test, covering product catalog structure through the basic checkout flow.",
-    image: cert1,
-  },
-  {
-    id: 2,
-    title: "Multi-Platform Application Development Competency Test",
-    date: "2026",
-    description:
-      "Competency test certificate for multi-platform application development, assessing the ability to design interfaces and application logic across devices.",
-    image: cert2,
-  },
-  {
-    id: 3,
-    title: "Industrial Visit to PT. Inti Persero and Institut Teknologi Bandung",
-    date: "2025",
-    description:
-      "Documentation of an industrial visit as part of workplace exposure and technology research in the telecommunications field.",
-    image: cert3,
-  },
-  {
-    id: 4,
-    title: "Certificate in Web Programming Fundamentals",
-    date: "2024",
-    description:
-      "Certificate in Web Programming Fundamentals.",
-    image: cert4,
-  },
-];
-
 const Achievements: React.FC = () => {
+  const { t } = useLanguage();
   const [activeItem, setActiveItem] = React.useState<Achievement | null>(null);
+
+  const achievements: Achievement[] = [
+    {
+      id: 1,
+      title: t.ach1Title,
+      date: "2025",
+      description: t.ach1Desc,
+      image: cert1,
+    },
+    {
+      id: 2,
+      title: t.ach2Title,
+      date: "2026",
+      description: t.ach2Desc,
+      image: cert2,
+    },
+    {
+      id: 3,
+      title: t.ach3Title,
+      date: "2025",
+      description: t.ach3Desc,
+      image: cert3,
+    },
+    {
+      id: 4,
+      title: t.ach4Title,
+      date: "2024",
+      description: t.ach4Desc,
+      image: cert4,
+    },
+  ];
 
   return (
     <section
@@ -221,7 +219,7 @@ const Achievements: React.FC = () => {
 
       <div style={{ textAlign: "center", marginBottom: "52px" }}>
         <h2 className="ach-heading">
-          <span className="ach-heading-grad">Achievements</span>
+          <span className="ach-heading-grad">{t.achHeading}</span>
         </h2>
         <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "10px" }}>
           <div style={{ width: "48px", height: "1px", background: "#BDD8F1" }} />
@@ -239,12 +237,12 @@ const Achievements: React.FC = () => {
           >
             <div className="ach-image-wrap">
               <img src={item.image} alt={item.title} />
-              <div className="ach-overlay">VIEW DETAILS</div>
+              <div className="ach-overlay">{t.achViewDetails}</div>
             </div>
 
             <div className="ach-card-body">
               <p className="ach-card-title">{item.title}</p>
-              <span className="ach-badge">certificate</span>
+              <span className="ach-badge">{t.achSubtitleNote}</span>
             </div>
           </div>
         ))}
