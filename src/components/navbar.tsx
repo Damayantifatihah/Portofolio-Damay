@@ -144,6 +144,14 @@ const navFontStyles = `
     transform: translateY(-1px);
   }
 
+  /* Mobile-only toggle that sits next to the hamburger icon.
+     Hidden by default (desktop uses the one inside menu-list). */
+  .mobile-actions {
+    display: none;
+    align-items: center;
+    gap: 10px;
+  }
+
   .hamburger-btn {
     display: none;
     background: none;
@@ -183,6 +191,16 @@ const navFontStyles = `
     .navbar-inner {
       padding: 0 20px;
       height: 60px;
+    }
+
+    /* Show the standalone mobile toggle next to the hamburger... */
+    .mobile-actions {
+      display: flex;
+    }
+
+    /* ...and hide the desktop toggle that lives inside the dropdown menu. */
+    .menu-list .lang-toggle-btn {
+      display: none;
     }
 
     .hamburger-btn {
@@ -233,12 +251,6 @@ const navFontStyles = `
       margin-top: 6px;
       width: 100%;
       box-sizing: border-box;
-    }
-
-    .lang-toggle-btn {
-      margin-top: 6px;
-      width: 100%;
-      text-align: center;
     }
   }
 `;
@@ -329,18 +341,6 @@ const Navbar: React.FC = () => {
           <span className="logo-text-grad">portfolio</span>
         </div>
 
-        <button
-          type="button"
-          className={`hamburger-btn${isOpen ? " open" : ""}`}
-          aria-label={isOpen ? "Close menu" : "Open menu"}
-          aria-expanded={isOpen}
-          onClick={() => setIsOpen((prev) => !prev)}
-        >
-          <span className="hamburger-bar" />
-          <span className="hamburger-bar" />
-          <span className="hamburger-bar" />
-        </button>
-
         <ul className={`menu-list${isOpen ? " open" : ""}`}>
           {links.map((link) => (
             <NavItemLink key={link.to} {...link} onClick={closeMenu} />
@@ -352,6 +352,25 @@ const Navbar: React.FC = () => {
             </button>
           </li>
         </ul>
+
+        {/* Visible only on mobile: sits beside the hamburger, always accessible */}
+        <div className="mobile-actions">
+          <button type="button" className="lang-toggle-btn" onClick={toggleLang}>
+            {lang === "en" ? "ID" : "EN"}
+          </button>
+
+          <button
+            type="button"
+            className={`hamburger-btn${isOpen ? " open" : ""}`}
+            aria-label={isOpen ? "Close menu" : "Open menu"}
+            aria-expanded={isOpen}
+            onClick={() => setIsOpen((prev) => !prev)}
+          >
+            <span className="hamburger-bar" />
+            <span className="hamburger-bar" />
+            <span className="hamburger-bar" />
+          </button>
+        </div>
       </div>
     </nav>
   );
