@@ -3,6 +3,8 @@ import type { ReactNode } from "react";
 
 type Language = "en" | "id";
 
+const STORAGE_KEY = "portfolio-lang";
+
 const translations = {
   en: {
     navAbout: "About",
@@ -236,10 +238,34 @@ interface LanguageContextType {
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
-export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [lang, setLang] = useState<Language>("en");
+// Reads the saved language from localStorage on first load.
+// Falls back to "en" if nothing is saved yet, the value is invalid,
+// or localStorage isn't available (e.g. during server-side rendering).
+function getInitialLanguage(): Language {
+  if (typeof window === "undefined") return "en";
+  try {
+    const saved = window.localStorage.getItem(STORAGE_KEY);
+    if (saved === "en" || saved === "id") return saved;
+  } catch {
+    // localStorage might be blocked (privacy mode, etc.) — just ignore it.
+  }
+  return "en";
+}
 
-  const toggleLang = () => setLang((prev) => (prev === "en" ? "id" : "en"));
+export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+  const [lang, setLang] = useState<Language>(getInitialLanguage);
+
+  const toggleLang = () => {
+    setLang((prev) => {
+      const next: Language = prev === "en" ? "id" : "en";
+      try {
+        window.localStorage.setItem(STORAGE_KEY, next);
+      } catch {
+        // Ignore write errors (e.g. storage full or blocked).
+      }
+      return next;
+    });
+  };
 
   return (
     <LanguageContext.Provider value={{ lang, toggleLang, t: translations[lang] }}>
