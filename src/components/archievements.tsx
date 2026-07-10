@@ -3,6 +3,7 @@ import cert1 from "../assets/KLS10.jpeg";
 import cert2 from "../assets/KLS11.jpeg";
 import cert3 from "../assets/PT.jpeg";
 import cert4 from "../assets/dicoding.jpeg";
+import cert5 from "../assets/ibm-skill.png"; // ganti sesuai nama file yang kamu import sendiri
 import { useLanguage } from "./bahasa/languageContext";
 
 interface Achievement {
@@ -45,6 +46,13 @@ const Achievements: React.FC = () => {
       date: "2024",
       description: t.ach4Desc,
       image: cert4,
+    },
+    {
+      id: 5,
+      title: t.ach5Title,
+      date: "2026",
+      description: t.ach5Desc,
+      image: cert5, // aktifkan setelah import cert5 di atas diisi
     },
   ];
 

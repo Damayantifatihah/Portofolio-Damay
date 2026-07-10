@@ -61,6 +61,58 @@ const translations = {
 
     ach4Title: "Certificate in Web Programming Fundamentals",
     ach4Desc: "Certificate in Web Programming Fundamentals.",
+
+    ach5Title: "IBM SkillsBuild Certificate",
+    ach5Desc:
+      "Certificate from IBM SkillsBuild for completing a course related to software development.",
+
+    // Projects section
+    projHeadingPrefix: "My",
+    projHeadingHighlight: "Projects",
+    projEmptyState: "No projects in this category yet.",
+    projLiveDemo: "Live Demo",
+    projViewDesign: "View Design",
+    projCode: "Code",
+
+    catAll: "All",
+    catWebsite: "Website",
+    catDesign: "Design",
+    catApplication: "Application",
+
+    proj1Label: "Mobile · Development",
+    proj1Title: "Community Reporting (Mobile)",
+    proj1Desc:
+      "Mobile version of the Laporin Aja platform, optimized so people can submit reports directly from their phone quickly and easily.",
+
+    proj2Label: "Web · Development",
+    proj2Title: "Community Reporting (Website)",
+    proj2Desc:
+      "A web-based community reporting platform for quickly and transparently reporting local issues.",
+
+    proj3Label: "Web · Development",
+    proj3Title: "Simple E-Commerce",
+    proj3Desc:
+      "A simple online store website featuring a product catalog, shopping cart, and checkout process.",
+
+    proj4Label: "Web · Development",
+    proj4Title: "Digital Library",
+    proj4Desc:
+      "A digital library application for searching, borrowing, and managing book collections online.",
+
+    proj5Label: "UI/UX Design",
+    proj5Title: "Glow & Flow",
+    proj5Desc:
+      "UI/UX design for the Glow & Flow app, covering user flow, wireframes, through to high-fidelity designs.",
+
+    proj6Label: "Web · Development",
+    proj6Title: "Grab Landing Page",
+    proj6Desc:
+      "A landing page themed around transportation & delivery services, built as a Dicoding course submission.",
+
+    proj7Label: "Digital Illustration",
+    proj7Title: "Anya Fanart Illustration",
+    proj7Desc:
+      "A character illustration project inspired by Anya, created digitally using Adobe Illustrator to explore linework, color, and shading.",
   },
   id: {
     navAbout: "Tentang",
@@ -119,6 +171,58 @@ const translations = {
 
     ach4Title: "Sertifikat Dasar-Dasar Pemrograman Web",
     ach4Desc: "Sertifikat Dasar-Dasar Pemrograman Web.",
+
+    ach5Title: "Sertifikat IBM SkillsBuild",
+    ach5Desc:
+      "Sertifikat dari IBM SkillsBuild untuk penyelesaian kursus terkait pengembangan perangkat lunak.",
+
+    // Projects section
+    projHeadingPrefix: "Proyek",
+    projHeadingHighlight: "Saya",
+    projEmptyState: "Belum ada proyek di kategori ini.",
+    projLiveDemo: "Lihat Demo",
+    projViewDesign: "Lihat Desain",
+    projCode: "Kode",
+
+    catAll: "Semua",
+    catWebsite: "Website",
+    catDesign: "Desain",
+    catApplication: "Aplikasi",
+
+    proj1Label: "Mobile · Pengembangan",
+    proj1Title: "Pelaporan Masyarakat (Mobile)",
+    proj1Desc:
+      "Versi mobile dari platform Laporin Aja, dioptimalkan agar masyarakat bisa mengirim laporan langsung dari ponsel dengan cepat dan mudah.",
+
+    proj2Label: "Web · Pengembangan",
+    proj2Title: "Pelaporan Masyarakat (Website)",
+    proj2Desc:
+      "Platform pelaporan masyarakat berbasis web untuk melaporkan masalah lokal secara cepat dan transparan.",
+
+    proj3Label: "Web · Pengembangan",
+    proj3Title: "Toko Online Sederhana",
+    proj3Desc:
+      "Website toko online sederhana dengan katalog produk, keranjang belanja, dan proses checkout.",
+
+    proj4Label: "Web · Pengembangan",
+    proj4Title: "Perpustakaan Digital",
+    proj4Desc:
+      "Aplikasi perpustakaan digital untuk mencari, meminjam, dan mengelola koleksi buku secara online.",
+
+    proj5Label: "Desain UI/UX",
+    proj5Title: "Glow & Flow",
+    proj5Desc:
+      "Desain UI/UX untuk aplikasi Glow & Flow, mencakup user flow, wireframe, hingga desain high-fidelity.",
+
+    proj6Label: "Web · Pengembangan",
+    proj6Title: "Landing Page Grab",
+    proj6Desc:
+      "Landing page bertema layanan transportasi & pengiriman, dibuat sebagai submission course Dicoding.",
+
+    proj7Label: "Ilustrasi Digital",
+    proj7Title: "Anya Fanart Illustration",
+    proj7Desc:
+      "Proyek ilustrasi karakter terinspirasi dari Anya, dibuat secara digital menggunakan Adobe Illustrator untuk mengeksplorasi garis, warna, dan shading.",
   },
 };
 

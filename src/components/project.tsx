@@ -6,7 +6,8 @@ import Ecommerce from "../assets/homely-desktop-mockup.png";
 import Perpustakaan from "../assets/perpus-mockup.png";
 import GlowFlow from "../assets/uiux-mockup.png";
 import Grab from "../assets/gojek-mockup.png";
-
+import AnyaFanart from "../assets/anya-project.png";
+import { useLanguage } from "./bahasa/languageContext";
 
 interface Project {
   title: string;
@@ -20,7 +21,9 @@ interface Project {
   image?: string;
 }
 
-const categories = ["All", "Website", "Design", "Application"];
+// Internal category keys stay in English so filtering logic is stable;
+// only the displayed label is translated (built from `t` inside the component).
+type CategoryKey = "All" | "Website" | "Design" | "Application";
 
 const tagColorMap: Record<string, { bg: string; color: string }> = {
   "Next.js":       { bg: "#E9F2FC", color: "#4A7BAC" },
@@ -35,81 +38,9 @@ const tagColorMap: Record<string, { bg: string; color: string }> = {
   "Figma":         { bg: "#E9F2FC", color: "#4A7BAC" },
   "Canva":         { bg: "#FBF3DC", color: "#A98A2E" },
   "Responsive UI": { bg: "#FDEAEA", color: "#C05656" },
+  "Adobe Illustrator": { bg: "#FDEBD8", color: "#C17817" },
+  "Digital Illustration": { bg: "#F5E0EE", color: "#B0568C" },
 };
-
-const projects: Project[] = [
-  {
-    title: "Community Reporting (Mobile)",
-    description:
-      "Mobile version of the Laporin Aja platform, optimized so people can submit reports directly from their phone quickly and easily.",
-    tags: ["Next.js", "TypeScript", "Responsive UI"],
-    category: ["Website", "Application"],
-    bg: "#FDE8EC",
-    label: "Mobile · Development",
-    github: "https://github.com/Damayantifatihah/LaporinAja-mobile",
-    demo: "https://laporin-aja-mobile.vercel.app/",
-    image: LaporMobile, 
-  },
-  {
-    title: "Community Reporting (Website)",
-    description:
-      "A web-based community reporting platform for quickly and transparently reporting local issues.",
-    tags: ["Next.js", "TypeScript", "Tailwind CSS"],
-    category: ["Website"],
-    bg: "#FDE8EC",
-    label: "Web · Development",
-    github: "https://github.com/Damayantifatihah/laporin-aja",
-    demo: "https://laporin-aja-smoky.vercel.app/",
-    image: LaporWeb,
-  },
-  {
-    title: "Simple E-Commerce",
-    description:
-      "A simple online store website featuring a product catalog, shopping cart, and checkout process.",
-    tags: ["React", "Tailwind CSS", "Fast API"],
-    category: ["Website"],
-    bg: "#F9D8DF",
-    label: "Web · Development",
-    github: "https://github.com/Damayantifatihah/E-commerce_Project",
-    demo: "https://e-commerce-project-gray-sigma.vercel.app/",
-    image: Ecommerce,
-  },
-  {
-    title: "Digital Library",
-    description:
-      "A digital library application for searching, borrowing, and managing book collections online.",
-    tags: ["Next.js", "MySQL", "Tailwind CSS", "JavaScript"],
-    category: ["Website"],
-    bg: "#F5E0E4",
-    label: "Web · Development",
-    github: "https://github.com/Damayantifatihah/project-perpustakaan",
-    demo: "https://project-perpustakaan-sandy.vercel.app/",
-    image: Perpustakaan,
-  },
-  {
-    title: "Glow & Flow",
-    description:
-      "UI/UX design for the Glow & Flow app, covering user flow, wireframes, through to high-fidelity designs.",
-    tags: ["Figma", "Canva"],
-    category: ["Design"],
-    bg: "#F2CDD4",
-    label: "UI/UX Design",
-    demo: "https://www.figma.com/design/w5MnV5Ji4Fj3etEUADzNZg/WebShop?node-id=0-1&t=RyHAgAPQ9EOtWjtY-1",
-    image: GlowFlow,
-  },
-  {
-    title: "Grab Landing Page",
-    description:
-      "A landing page themed around transportation & delivery services, built as a Dicoding course submission.",
-    tags: ["HTML", "CSS", "JavaScript"],
-    category: ["Website"],
-    bg: "#FDE8EC",
-    label: "Web · Development",
-    github: "https://github.com/Damayantifatihah/Dicoding-projectGrab",
-    demo: "https://dicoding-project-grab.vercel.app/",
-    image: Grab,
-  },
-];
 
 const styles = `
   .projects-section {
@@ -319,6 +250,8 @@ function ProjectMockup({ project }: { project: Project }) {
 }
 
 function ProjectCard({ project }: { project: Project }) {
+  const { t } = useLanguage();
+
   return (
     <div className="project-card">
       <ProjectMockup project={project} />
@@ -373,7 +306,7 @@ function ProjectCard({ project }: { project: Project }) {
               rel="noopener noreferrer"
             >
               <FaArrowUpRightFromSquare />
-              {project.category.includes("Design") ? "View Design" : "Live Demo"}
+              {project.category.includes("Design") ? t.projViewDesign : t.projLiveDemo}
             </a>
           )}
           {project.github && (
@@ -383,7 +316,7 @@ function ProjectCard({ project }: { project: Project }) {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <FaGithub /> Code
+              <FaGithub /> {t.projCode}
             </a>
           )}
         </div>
@@ -393,7 +326,93 @@ function ProjectCard({ project }: { project: Project }) {
 }
 
 function Projects() {
-  const [activeFilter, setActiveFilter] = useState("All");
+  const { t } = useLanguage();
+  const [activeFilter, setActiveFilter] = useState<CategoryKey>("All");
+
+  const projects: Project[] = [
+    {
+      title: t.proj1Title,
+      description: t.proj1Desc,
+      tags: ["Next.js", "TypeScript", "Responsive UI"],
+      category: ["Website", "Application"],
+      bg: "#FDE8EC",
+      label: t.proj1Label,
+      github: "https://github.com/Damayantifatihah/LaporinAja-mobile",
+      demo: "https://laporin-aja-mobile.vercel.app/",
+      image: LaporMobile,
+    },
+    {
+      title: t.proj2Title,
+      description: t.proj2Desc,
+      tags: ["Next.js", "TypeScript", "Tailwind CSS"],
+      category: ["Website"],
+      bg: "#FDE8EC",
+      label: t.proj2Label,
+      github: "https://github.com/Damayantifatihah/laporin-aja",
+      demo: "https://laporin-aja-smoky.vercel.app/",
+      image: LaporWeb,
+    },
+    {
+      title: t.proj3Title,
+      description: t.proj3Desc,
+      tags: ["React", "Tailwind CSS", "Fast API"],
+      category: ["Website"],
+      bg: "#F9D8DF",
+      label: t.proj3Label,
+      github: "https://github.com/Damayantifatihah/E-commerce_Project",
+      demo: "https://e-commerce-project-gray-sigma.vercel.app/",
+      image: Ecommerce,
+    },
+    {
+      title: t.proj4Title,
+      description: t.proj4Desc,
+      tags: ["Next.js", "MySQL", "Tailwind CSS", "JavaScript"],
+      category: ["Website"],
+      bg: "#F5E0E4",
+      label: t.proj4Label,
+      github: "https://github.com/Damayantifatihah/project-perpustakaan",
+      demo: "https://project-perpustakaan-sandy.vercel.app/",
+      image: Perpustakaan,
+    },
+    {
+      title: t.proj5Title,
+      description: t.proj5Desc,
+      tags: ["Figma", "Canva"],
+      category: ["Design"],
+      bg: "#F2CDD4",
+      label: t.proj5Label,
+      demo: "https://www.figma.com/design/w5MnV5Ji4Fj3etEUADzNZg/WebShop?node-id=0-1&t=RyHAgAPQ9EOtWjtY-1",
+      image: GlowFlow,
+    },
+    {
+      title: t.proj6Title,
+      description: t.proj6Desc,
+      tags: ["HTML", "CSS", "JavaScript"],
+      category: ["Website"],
+      bg: "#FDE8EC",
+      label: t.proj6Label,
+      github: "https://github.com/Damayantifatihah/Dicoding-projectGrab",
+      demo: "https://dicoding-project-grab.vercel.app/",
+      image: Grab,
+    },
+    {
+      title: t.proj7Title,
+      description: t.proj7Desc,
+      tags: ["Adobe Illustrator", "Digital Illustration"],
+      category: ["Design"],
+      bg: "#F5E0EE",
+      label: t.proj7Label,
+      demo: "https://www.instagram.com/p/C_X5krJSdnx/?igsh=MTR3YWh3czA0bHdydA==", // ganti dengan link Instagram post kamu
+      image: AnyaFanart,
+    },
+  ];
+
+  const categoryOptions: { key: CategoryKey; label: string }[] = [
+    { key: "All", label: t.catAll },
+    { key: "Website", label: t.catWebsite },
+    { key: "Design", label: t.catDesign },
+    { key: "Application", label: t.catApplication },
+  ];
 
   const filtered =
     activeFilter === "All"
@@ -407,21 +426,26 @@ function Projects() {
       {/* Heading */}
       <div style={{ textAlign: "center", marginBottom: "36px" }}>
         <h2 className="projects-heading">
-          My <em className="projects-heading-grad">Projects</em>
+          {t.projHeadingPrefix} <em className="projects-heading-grad">{t.projHeadingHighlight}</em>
         </h2>
         <div style={{ width: "36px", height: "2px", background: "linear-gradient(90deg, #F38081, #EFD780)", borderRadius: "2px", margin: "14px auto 0" }} />
       </div>
 
       {/* Filter */}
       <div className="projects-filter-row">
-        {categories.map((cat) => (
-          <FilterTab key={cat} label={cat} active={activeFilter === cat} onClick={() => setActiveFilter(cat)} />
+        {categoryOptions.map((cat) => (
+          <FilterTab
+            key={cat.key}
+            label={cat.label}
+            active={activeFilter === cat.key}
+            onClick={() => setActiveFilter(cat.key)}
+          />
         ))}
       </div>
 
       {/* Grid */}
       {filtered.length === 0 ? (
-        <p style={{ textAlign: "center", color: "#9C8880" }}>No projects in this category yet.</p>
+        <p style={{ textAlign: "center", color: "#9C8880" }}>{t.projEmptyState}</p>
       ) : (
         <div className="projects-grid">
           {filtered.map((p) => (
