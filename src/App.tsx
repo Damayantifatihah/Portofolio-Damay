@@ -29,21 +29,21 @@ function AboutPage() {
 function App() {
   const [showIntro, setShowIntro] = useState(true);
 
-  if (showIntro) {
-    return <IntroAnimation onFinish={() => setShowIntro(false)} />;
-  }
-
   return (
     <LanguageProvider>
-      <BrowserRouter>
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<AboutPage />} />
-          <Route path="/achievements" element={<Achievements />} />
-          <Route path="/projects" element={<Project />} />
-          <Route path="/contact" element={<Contact />} />
-        </Routes>
-      </BrowserRouter>
+      {showIntro ? (
+        <IntroAnimation onFinish={() => setShowIntro(false)} />
+      ) : (
+        <BrowserRouter>
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<AboutPage />} />
+            <Route path="/achievements" element={<Achievements />} />
+            <Route path="/projects" element={<Project />} />
+            <Route path="/contact" element={<Contact />} />
+          </Routes>
+        </BrowserRouter>
+      )}
     </LanguageProvider>
   );
 }

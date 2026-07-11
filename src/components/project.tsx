@@ -333,7 +333,7 @@ function Projects() {
     {
       title: t.proj1Title,
       description: t.proj1Desc,
-      tags: ["Next.js", "TypeScript", "Responsive UI"],
+      tags: ["React Native", "TypeScript", "PostgreSQL", "Responsive UI"],
       category: ["Website", "Application"],
       bg: "#FDE8EC",
       label: t.proj1Label,
@@ -344,7 +344,7 @@ function Projects() {
     {
       title: t.proj2Title,
       description: t.proj2Desc,
-      tags: ["Next.js", "TypeScript", "Tailwind CSS"],
+      tags: ["Next.js", "TypeScript", "PostgreSQL", "Express.js"],
       category: ["Website"],
       bg: "#FDE8EC",
       label: t.proj2Label,

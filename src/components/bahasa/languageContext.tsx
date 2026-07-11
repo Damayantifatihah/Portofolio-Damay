@@ -44,6 +44,10 @@ const translations = {
     contactFooter: "Made with",
     contactFooterBy: "by Damayanti",
 
+    // Intro / splash screen
+    introGreeting: "Welcome,",
+    introHighlight: "glad you're here",
+
     // Achievements section
     achHeading: "Achievements",
     achSubtitleNote: "certificate",
@@ -153,6 +157,10 @@ const translations = {
       "Punya ide, proyek, atau cuma mau say hi? Yuk bikin sesuatu yang keren bareng!",
     contactFooter: "Dibuat dengan",
     contactFooterBy: "oleh Damayanti",
+
+    // Intro / splash screen
+    introGreeting: "Selamat datang,",
+    introHighlight: "senang kamu di sini",
 
     // Achievements section
     achHeading: "Pencapaian",

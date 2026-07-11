@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useLanguage } from "./bahasa/languageContext";
 
 const introStyles = `
   @keyframes spineGrow {
@@ -162,6 +163,7 @@ const petalColors = [
 
 function IntroAnimation({ onFinish }: IntroAnimationProps) {
   const [exiting, setExiting] = useState(false);
+  const { t } = useLanguage();
 
   useEffect(() => {
     const exitTimer = setTimeout(() => setExiting(true), 3000);
@@ -358,9 +360,9 @@ function IntroAnimation({ onFinish }: IntroAnimationProps) {
       </div>
 
       <p className="intro-text">
-        Welcome,{" "}
+        {t.introGreeting}{" "}
         <span className="intro-gradient-text" style={{ fontWeight: 600 }}>
-          glad you're here
+          {t.introHighlight}
         </span>{" "}
         <span
           className="wave-emoji"
