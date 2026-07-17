@@ -334,7 +334,7 @@ function Projects() {
       title: t.proj1Title,
       description: t.proj1Desc,
       tags: ["React Native", "TypeScript", "PostgreSQL", "Responsive UI"],
-      category: ["Website", "Application"],
+      category: ["Application"],
       bg: "#FDE8EC",
       label: t.proj1Label,
       github: "https://github.com/Damayantifatihah/LaporinAja-mobile",
